@@ -34,7 +34,7 @@ public class PlayerMove : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         if (Input.GetButtonDown("Jump"))
         {
-            rb.AddForce(Vector3.up * 5, ForceMode.Impulse);
+            rb.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
         }
 
         float h = Input.GetAxisRaw("Horizontal");
