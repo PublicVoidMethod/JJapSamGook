@@ -6,9 +6,12 @@ public class PlayerMove : MonoBehaviour
 {
     public float moveSpeed = 5.0f;
 
-    public float gravity = -9.8f;
-    public float yVelocity = 0;
+    //public float gravity = -9.8f;
+    //public float yVelocity = 0;
     public float jumpPower = 10;
+    
+    
+    float jumpCount = 2;
     float dashSpeed;
 
     public Rigidbody rb;
@@ -16,25 +19,41 @@ public class PlayerMove : MonoBehaviour
     void Start()
     {
         
+
     }
 
-    
+
     void Update()
     {
-       
+        dashSpeed = moveSpeed;
+        //isJumping = false;
         Move();
+       
     }
 
     //플레이어 이동
     public void Move()
     {
-        dashSpeed = moveSpeed;
+        
 
         // 점프
         rb = GetComponent<Rigidbody>();
-        if (Input.GetButtonDown("Jump"))
+        
+        
+        if (Input.GetButtonDown("Jump") )
         {
-            rb.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
+            if (jumpCount > 0)
+            {
+                
+                rb.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
+                jumpCount--;
+                
+            }
+            else
+            {
+                return;
+            }
+            
         }
 
         float h = Input.GetAxisRaw("Horizontal");
@@ -46,16 +65,27 @@ public class PlayerMove : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftShift))
         {
             // moveSpeed 변수의 값을 2배로 증가시킨다.
-            dashSpeed = moveSpeed * 2;
-            
+            dashSpeed = moveSpeed * 4;
+           // print("대쉬");
         }
         // 그렇지 않고, 좌측 Shift 버튼을 떼면...
         else if (Input.GetKeyUp(KeyCode.LeftShift))
         {
             // moveSpeed 변수의 값을 원래대로 한다.
             dashSpeed = moveSpeed;
+           // print("대쉬x");
         }
 
-        transform.position += dir * Time.deltaTime;
+        rb.MovePosition(transform.position + dir * dashSpeed * Time.deltaTime);
+
+        
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            jumpCount = 2;
+        }
     }
 }
