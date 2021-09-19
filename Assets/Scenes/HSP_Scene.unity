@@ -337,6 +337,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1583824329709992861, guid: d0618d95cc5d9fe44b6d2818e322bac3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1583824330356752786, guid: d0618d95cc5d9fe44b6d2818e322bac3, type: 3}
       propertyPath: meetPoint
       value: 
@@ -417,6 +421,10 @@ PrefabInstance:
     - target: {fileID: 7276435616298876273, guid: 83fb81602f939d3409982da6d9a7a04d, type: 3}
       propertyPath: m_Name
       value: Player_HSP
+      objectReference: {fileID: 0}
+    - target: {fileID: 7276435616298876273, guid: 83fb81602f939d3409982da6d9a7a04d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7276435616298876285, guid: 83fb81602f939d3409982da6d9a7a04d, type: 3}
       propertyPath: m_RootOrder
