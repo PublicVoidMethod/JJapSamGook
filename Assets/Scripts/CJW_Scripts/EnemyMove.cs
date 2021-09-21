@@ -10,7 +10,8 @@ public class EnemyMove : MonoBehaviour
     {
         Idle,
         Move,
-        Attack
+        Attack,
+            Die
     }
 
     public EnemyState eState;
@@ -18,14 +19,22 @@ public class EnemyMove : MonoBehaviour
     public float attackRange = 1.5f;
     GameObject player;
     public float moveSpeed = 5;
-
+    Animator anim;
     float currentTime = 0;
-    float delayTime = 2;
-    
+    public float delayTime = 2;
+    bool isNum = false;
+    [HideInInspector] public int maxHP = 20;
+    [SerializeField] int curHP = 0;
+    int liveNum = 1;
+
     void Start()
     {
+        currentTime = delayTime;
         eState = EnemyState.Idle;
         player = GameObject.Find("Player");
+        anim = GetComponentInChildren<Animator>();
+        curHP = maxHP;
+
     }
 
     protected void Update()
@@ -41,19 +50,31 @@ public class EnemyMove : MonoBehaviour
             case EnemyState.Attack:
                 Attack();
                 break;
+            case EnemyState.Die:
+                Die();
+                break;
             default:
                 break;
         }
-    
+        
+        if(curHP == 0)
+        {
+            liveNum--;
+            eState =  EnemyState.Die;
+        }
+        currentTime += Time.deltaTime;
+
+
     }
 
     private void Idle()
     {
+        
         float distance = (player.transform.position - transform.position).magnitude;
 
         if (attackDistance >= distance)
         {
-
+           
             SetMoveState();
           
         }
@@ -61,19 +82,24 @@ public class EnemyMove : MonoBehaviour
 
     private void SetMoveState()
     {
+        
         eState = EnemyState.Move;
+        isNum = false;
+        currentTime = 0;
     }
 
 
 
     private void Move()
     {
+        
         Vector3 dir = player.transform.position - transform.position;
         float distance = dir.magnitude;
         if (distance <= attackRange)
         {
+            
             eState = EnemyState.Attack;
-            currentTime = 0;
+           
             //CancelInvoke();
 
             //enemyAnim.SetTrigger("MoveToAttack");
@@ -83,21 +109,66 @@ public class EnemyMove : MonoBehaviour
             return;
         }
 
-
+        
         dir.Normalize();
+        anim.SetTrigger("Run");
         transform.position += dir * moveSpeed * Time.deltaTime;
+        transform.rotation = Quaternion.LookRotation(dir);
     }
 
     public virtual void Attack()
     {
-        print("이제부터 공격을 시작하겠다!");
+        
+        //print(currentTime);
+        int AttackNum = 4;
+        if (currentTime >= delayTime)
+
+        { 
+            if (isNum == false)
+        {
+            AttackNum = UnityEngine.Random.Range(0, 4);
+            //print(AttackNum);
+            isNum = true;
+        }
+        }
         Vector3 dir = player.transform.position - transform.position;
         float distance = dir.magnitude;
         currentTime += Time.deltaTime;
         //사정거리 안에 있어야 하고)
         if (distance < attackRange)
         {
-           
+            
+            //print("이제부터 공격을 시작하겠다!");
+            if (AttackNum == 0)
+            {
+           // print("0번 공격 게시!");
+                anim.SetTrigger("Attack0");
+                
+                SetMoveState();
+            }
+            if(AttackNum == 1)
+            {
+           // print("1번 공격 게시!");
+                anim.SetTrigger("Attack1");
+                
+                SetMoveState();
+            }
+            if (AttackNum == 2)
+            {
+           //print("2번 공격 게시!");
+                anim.SetTrigger("Attack2");
+                
+                SetMoveState();
+            }
+            if (AttackNum == 3)
+            {
+            //print("3번 공격 게시!");
+
+                anim.SetTrigger("Attack3");
+             
+                SetMoveState();
+            }
+          
         }
         //공격 범위 밖이면
         else
@@ -105,14 +176,31 @@ public class EnemyMove : MonoBehaviour
             SetMoveState();
 
         }
+        
+    }
+
+    public void OnHit(int damage)
+    {
+        curHP = Mathf.Max(curHP - damage, 0);
+        print(curHP);
     }
 
     public void Die()
     {
+      if(liveNum ==0)
+        { 
+        anim.SetTrigger("Die");
 
+        // 콜라이더를 비활성화한다.
+        GetComponent<CapsuleCollider>().enabled = false;
+        Invoke("EnemyDestroy", 3.0f);
+        }
     }
 
-
+    public void EnemyDestroy()
+    {
+        Destroy(gameObject);
+    }
     //private void OnDrawGizmos()
     //{
     //    Gizmos.color = Color.white;
