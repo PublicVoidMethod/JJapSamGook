@@ -31,7 +31,7 @@ public class EnemyMove : MonoBehaviour
     {
         currentTime = delayTime;
         eState = EnemyState.Idle;
-        player = GameObject.Find("Player");
+        player = GameObject.Find("Player_CJW");
         anim = GetComponentInChildren<Animator>();
         curHP = maxHP;
 
