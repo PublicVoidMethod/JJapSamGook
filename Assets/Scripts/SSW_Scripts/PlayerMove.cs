@@ -15,11 +15,13 @@ public class PlayerMove : MonoBehaviour
     float dashSpeed;
 
     public Rigidbody rb;
+
+    Animator anim;
     
     void Start()
     {
-        
 
+        anim = GetComponentInChildren<Animator>();
     }
 
 
@@ -61,7 +63,18 @@ public class PlayerMove : MonoBehaviour
         Vector3 dir = new Vector3(h, 0, v);
         dir.Normalize();
 
-        
+        anim.SetFloat("Horizontal", h);
+        anim.SetFloat("Vertical", v);
+
+        // 이동하려는 방향으로 캐릭터를 회전시킨다.
+        if (dir != Vector3.zero)
+        {
+            Vector3 rot = dir;
+            rot.y = 0;
+            transform.rotation = Quaternion.LookRotation(rot);
+        }
+
+
         if (Input.GetKey(KeyCode.LeftShift))
         {
             // moveSpeed 변수의 값을 2배로 증가시킨다.
@@ -76,9 +89,9 @@ public class PlayerMove : MonoBehaviour
            // print("대쉬x");
         }
 
-        rb.MovePosition(transform.position + dir * dashSpeed * Time.deltaTime);
+        //rb.MovePosition(transform.position + dir * dashSpeed * Time.deltaTime);
 
-        
+        transform.position += dir * dashSpeed * Time.deltaTime;
     }
 
     private void OnCollisionEnter(Collision collision)
