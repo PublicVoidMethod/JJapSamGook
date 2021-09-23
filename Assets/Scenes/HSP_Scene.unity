@@ -274,13 +274,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 357321343}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.14412415, y: -0, z: -0, w: 0.98955965}
+  m_LocalPosition: {x: 0, y: 2.76, z: -4.11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 542578561}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 16.573, y: 0, z: 0}
 --- !u!1001 &441972287
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -490,6 +490,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bossMaxHP: 100
+  bossHPSlider: {fileID: 1351661027}
+  bossCurrentHP: 0
 --- !u!1 &840796787
 GameObject:
   m_ObjectHideFlags: 0
@@ -687,6 +689,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1583824330910672240}
     m_Modifications:
+    - target: {fileID: -8168471445014989898, guid: ce9f876e58055064dacc038bb440a147, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.104
+      objectReference: {fileID: 0}
+    - target: {fileID: -8168471445014989898, guid: ce9f876e58055064dacc038bb440a147, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.009
+      objectReference: {fileID: 0}
+    - target: {fileID: -8168471445014989898, guid: ce9f876e58055064dacc038bb440a147, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.36
+      objectReference: {fileID: 0}
     - target: {fileID: -6057140222963153312, guid: ce9f876e58055064dacc038bb440a147, type: 3}
       propertyPath: m_Controller
       value: 

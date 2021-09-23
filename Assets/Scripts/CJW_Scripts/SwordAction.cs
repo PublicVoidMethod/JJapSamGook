@@ -31,6 +31,11 @@ public class SwordAction : MonoBehaviour
             // 플레이어에게 자신의 공격력만큼의 데미지를 준다.
             enemy.OnHit(attackPower);
         }
+
+        if (other.gameObject.CompareTag("Boss"))  // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+        {
+            BossStatus.instance.OnDamage(attackPower);  // @@@@@@@@@@@@@@@@@@@@@@@@@@@@
+        }
     }
 
    

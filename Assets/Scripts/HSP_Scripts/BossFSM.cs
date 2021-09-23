@@ -16,6 +16,8 @@ public class BossFSM : MonoBehaviour
     Rigidbody bossRB;  // 보스의 리지드 바디 변수
     Animator bossAnim;  // 보스의 애니메이터 변수
 
+    bool isbooked = false;
+
     // 보스의 열거형 상수
     public enum BossState
     {
@@ -96,11 +98,7 @@ public class BossFSM : MonoBehaviour
                     //Vector3 dir = (player.position - transform.position).normalized;
                     //transform.rotation = Quaternion.LookRotation(dir);
 
-                    // 보스의 상태를 Move 상태로 전환한다.
-                    bState = BossState.Move;
-
-                    // 이동 애니메이션을 실행한다.
-                    bossAnim.SetTrigger("IdleToMove");
+                    SetMoveState();
                 }
             }
         }
@@ -135,11 +133,15 @@ public class BossFSM : MonoBehaviour
         // 만약 나(보스)와 플레이어와의 거리가 평타 공격 범위보다 멀어지면(평타 공격 범위 < 나와 플레이어의 거리)
         if(attackRange < (player.position - transform.position).magnitude)
         {
-            // Move상태로 1.5초 후에 전환한다.  ***************************
-            bState = BossState.Move;
-            return;
+            if (!isbooked)
+            {
+                // Move상태로 1.5초 후에 전환한다.
+                Invoke("SetMoveState", 1.5f);
+                //return;
+                isbooked = true;
 
-            // 무브 애니메이션을 실행한다.
+                //bossAnim.SetTrigger("IdleToMove");
+            }
         }
     }
 
@@ -151,6 +153,17 @@ public class BossFSM : MonoBehaviour
     private void Die()
     {
 
+    }
+
+    void SetMoveState()
+    {
+        // 보스의 상태를 Move 상태로 전환한다.
+        bState = BossState.Move;
+
+        // 이동 애니메이션을 실행한다.
+        bossAnim.SetTrigger("IdleToMove");
+
+        isbooked = false;
     }
 
     /// <summary>
