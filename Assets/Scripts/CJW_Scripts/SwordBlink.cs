@@ -23,12 +23,10 @@ public class SwordBlink : MonoBehaviour
     private void On()
     {
         bc.enabled = true;
-       
     }
 
     private void Off()
     {
         bc.enabled = false;
-      
     }
 }

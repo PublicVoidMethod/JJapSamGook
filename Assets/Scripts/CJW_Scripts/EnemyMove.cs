@@ -23,7 +23,7 @@ public class EnemyMove : MonoBehaviour
     float currentTime = 0;
     public float delayTime = 2;
     bool isNum = false;
-    [HideInInspector] public int maxHP = 20;
+    [HideInInspector] public int maxHP = 10;
     [SerializeField] int curHP = 0;
     int liveNum = 1;
 
@@ -31,10 +31,11 @@ public class EnemyMove : MonoBehaviour
     {
         currentTime = delayTime;
         eState = EnemyState.Idle;
-        player = GameObject.Find("Player_CJW");
+        player = GameObject.FindGameObjectWithTag("Player"); // ï¿½É½Â¿ì°¡ ï¿½ï¿½        
         anim = GetComponentInChildren<Animator>();
         curHP = maxHP;
 
+        
     }
 
     protected void Update()
@@ -104,8 +105,8 @@ public class EnemyMove : MonoBehaviour
 
             //enemyAnim.SetTrigger("MoveToAttack");
 
-            //Á¶°Ç¿¡ ¸Â´Ù¸é ÇÔ¼ö¸¦ Á¾·áÇÑ´Ù.
-            //¸®ÅÏÀÌ ³ª¿À¸é ¾Æ·¡ ÇÔ¼ö´Â º¸Áö ¾Ê°í Á¾·áÇÑ´Ù.
+            //ï¿½ï¿½ï¿½Ç¿ï¿½ ï¿½Â´Ù¸ï¿½ ï¿½Ô¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
+            //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Æ·ï¿½ ï¿½Ô¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
             return;
         }
 
@@ -134,35 +135,35 @@ public class EnemyMove : MonoBehaviour
         Vector3 dir = player.transform.position - transform.position;
         float distance = dir.magnitude;
         currentTime += Time.deltaTime;
-        //»çÁ¤°Å¸® ¾È¿¡ ÀÖ¾î¾ß ÇÏ°í)
+        //ï¿½ï¿½ï¿½ï¿½ï¿½Å¸ï¿½ ï¿½È¿ï¿½ ï¿½Ö¾ï¿½ï¿½ ï¿½Ï°ï¿½)
         if (distance < attackRange)
         {
             
-            //print("ÀÌÁ¦ºÎÅÍ °ø°ÝÀ» ½ÃÀÛÇÏ°Ú´Ù!");
+            //print("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°Ú´ï¿½!");
             if (AttackNum == 0)
             {
-           // print("0¹ø °ø°Ý °Ô½Ã!");
+           // print("0ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô½ï¿½!");
                 anim.SetTrigger("Attack0");
                 
                 SetMoveState();
             }
             if(AttackNum == 1)
             {
-           // print("1¹ø °ø°Ý °Ô½Ã!");
+           // print("1ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô½ï¿½!");
                 anim.SetTrigger("Attack1");
                 
                 SetMoveState();
             }
             if (AttackNum == 2)
             {
-           //print("2¹ø °ø°Ý °Ô½Ã!");
+           //print("2ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô½ï¿½!");
                 anim.SetTrigger("Attack2");
                 
                 SetMoveState();
             }
             if (AttackNum == 3)
             {
-            //print("3¹ø °ø°Ý °Ô½Ã!");
+            //print("3ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô½ï¿½!");
 
                 anim.SetTrigger("Attack3");
              
@@ -170,7 +171,7 @@ public class EnemyMove : MonoBehaviour
             }
           
         }
-        //°ø°Ý ¹üÀ§ ¹ÛÀÌ¸é
+        //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¸ï¿½
         else
         {
             SetMoveState();
@@ -191,7 +192,7 @@ public class EnemyMove : MonoBehaviour
         { 
         anim.SetTrigger("Die");
 
-        // ÄÝ¶óÀÌ´õ¸¦ ºñÈ°¼ºÈ­ÇÑ´Ù.
+        // ï¿½Ý¶ï¿½ï¿½Ì´ï¿½ï¿½ï¿½ ï¿½ï¿½È°ï¿½ï¿½È­ï¿½Ñ´ï¿½.
         GetComponent<CapsuleCollider>().enabled = false;
         Invoke("EnemyDestroy", 3.0f);
         }
@@ -205,7 +206,7 @@ public class EnemyMove : MonoBehaviour
     //{
     //    Gizmos.color = Color.white;
 
-    //    // ½Ã¾ß ¹üÀ§ÀÇ ¾çÂÊ ³¡ ÁöÁ¡À» ±¸ÇÑ´Ù.
+    //    // ï¿½Ã¾ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ñ´ï¿½.
     //    Vector3[] sightPos = CalculateSightPoint(sightDistance, sightDegree);
 
     //    for (int i = 0; i < sightPos.Length; i++)
