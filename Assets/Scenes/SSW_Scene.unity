@@ -443,6 +443,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3518088340743301393, guid: 27c255c13e2a04d48810c2bfe87339d6, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4747192944949300762, guid: 27c255c13e2a04d48810c2bfe87339d6, type: 3}
       propertyPath: m_Name
       value: Player_SSW1
@@ -451,6 +455,10 @@ PrefabInstance:
       propertyPath: hitattack
       value: 
       objectReference: {fileID: 105306974692662625}
+    - target: {fileID: 4747192944949301221, guid: 27c255c13e2a04d48810c2bfe87339d6, type: 3}
+      propertyPath: jumpPower
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 4747192944949301222, guid: 27c255c13e2a04d48810c2bfe87339d6, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -551,6 +559,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7385803925499134624, guid: 06efebdafb5d13842834426291139ef2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7385803925499134627, guid: 06efebdafb5d13842834426291139ef2, type: 3}
+      propertyPath: curHP
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7385803925499134636, guid: 06efebdafb5d13842834426291139ef2, type: 3}

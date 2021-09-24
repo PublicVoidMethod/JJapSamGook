@@ -11,9 +11,9 @@ public class PlayerMove : MonoBehaviour
     //public float yVelocity = 0;
     public float jumpPower = 10;
     public int livenumber = 1;
+    float curTime = 0;
     
-    
-    float jumpCount = 2;
+    float jumpCount = 1;
    // float attackCount = 4;
     float dashSpeed;
 
@@ -66,6 +66,7 @@ public class PlayerMove : MonoBehaviour
             GetComponent<CapsuleCollider>().enabled = false;
             rb.useGravity = false;
             anim.SetTrigger("Die");
+            
 
         }
     }
@@ -79,7 +80,7 @@ public class PlayerMove : MonoBehaviour
         {
             if (jumpCount > 0)
             {
-                
+                anim.SetBool("jump", true);
                 rb.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
                 jumpCount--;
                 
@@ -107,20 +108,13 @@ public class PlayerMove : MonoBehaviour
             transform.rotation = Quaternion.LookRotation(rot);
         }
 
-
-        if (Input.GetKey(KeyCode.LeftShift))
+        curTime += Time.deltaTime;
+        if (Input.GetKeyDown(KeyCode.LeftShift) && curTime > 0.3f )
         {
-            // moveSpeed 변수의 값을 2배로 증가시킨다.
-            dashSpeed = moveSpeed * 4;
-           // print("대쉬");
+            curTime = 0;
+            anim.SetTrigger("Roll");
         }
-        // 그렇지 않고, 좌측 Shift 버튼을 떼면...
-        else if (Input.GetKeyUp(KeyCode.LeftShift))
-        {
-            // moveSpeed 변수의 값을 원래대로 한다.
-            dashSpeed = moveSpeed;
-           // print("대쉬x");
-        }
+        
 
         //rb.MovePosition(transform.position + dir * dashSpeed * Time.deltaTime);
 
@@ -128,21 +122,28 @@ public class PlayerMove : MonoBehaviour
 
 
         // 평타 
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButtonDown(0))
         {
+            //SwordBlink_SSW.blink.On();
             if(hitattack != null)
             {
-                HitAction_SSW attack = hitattack.GetComponentInChildren<HitAction_SSW>();
+
+                HitAction_SSW attack = hitattack.GetComponentInChildren<HitAction_SSW>();// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
                 attack.attackDamage = 0;  // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
                 anim.SetTrigger("Attack01");
                 // attackCount--;
                 // print(attackCount);
             }
+            else
+            {
 
+                anim.SetTrigger("Attack01");
+            }
 
 
         }
+            //SwordBlink_SSW.blink.Off();
 
 
 
@@ -180,7 +181,8 @@ public class PlayerMove : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
-            jumpCount = 2;
+            anim.SetBool("jump", false);
+            jumpCount = 1;
         }
 
         

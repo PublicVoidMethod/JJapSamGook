@@ -32,6 +32,6 @@ public class SwordAction : MonoBehaviour
             enemy.OnHit(attackPower);
         }
     }
-
+    // 트리거를 비활성화한다
    
 }

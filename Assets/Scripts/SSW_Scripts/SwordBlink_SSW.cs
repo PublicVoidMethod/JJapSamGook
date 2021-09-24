@@ -4,8 +4,25 @@ using UnityEngine;
 
 public class SwordBlink_SSW : MonoBehaviour
 {
+    public static SwordBlink_SSW blink;
+
+   
+
+
     public GameObject sword;
     BoxCollider bc;
+
+    private void Awake()
+    {
+        if (blink == null)
+        {
+            blink = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -20,16 +37,22 @@ public class SwordBlink_SSW : MonoBehaviour
         
     }
 
-    private void On()
+    //public IEnumerator SwordOnOff()
+    //{
+    //    bc.enabled = true;
+    //    yield return null;
+    //}
+
+    public void On()
     {
         bc.enabled = true;
-        print("¿Â");
+        print(bc.enabled);
     }
 
-    private void Off()
+    public void Off()
     {
         bc.enabled = false;
-        print("¿ÀÇÁ");
+        print(bc.enabled);
     }
 
     
