@@ -225,7 +225,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e7a4beb776c8ae43ad584e7aa6a8a19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  viewPoint: {fileID: 6838676589284749153}
+  viewPoint: {fileID: 0}
   followSpeed: 2
 --- !u!114 &276830010
 MonoBehaviour:
@@ -505,11 +505,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 27c255c13e2a04d48810c2bfe87339d6, type: 3}
---- !u!4 &6838676589284749153 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2235675428144747398, guid: 27c255c13e2a04d48810c2bfe87339d6, type: 3}
-  m_PrefabInstance: {fileID: 4747192944912235751}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7424612431573458893
 PrefabInstance:
   m_ObjectHideFlags: 0

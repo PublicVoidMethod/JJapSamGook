@@ -128,8 +128,8 @@ public class PlayerMove : MonoBehaviour
             if(hitattack != null)
             {
 
-                HitAction_SSW attack = hitattack.GetComponentInChildren<HitAction_SSW>();// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-                attack.attackDamage = 0;  // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+                //HitAction_SSW attack = hitattack.GetComponentInChildren<HitAction_SSW>();// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+                //attack.attackDamage = 0;  // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
                 anim.SetTrigger("Attack01");
                 // attackCount--;
@@ -137,7 +137,6 @@ public class PlayerMove : MonoBehaviour
             }
             else
             {
-
                 anim.SetTrigger("Attack01");
             }
 
@@ -177,14 +176,17 @@ public class PlayerMove : MonoBehaviour
     //    }
     //}
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.CompareTag("Ground"))
+        if (other.gameObject.CompareTag("Ground"))
         {
             anim.SetBool("jump", false);
             jumpCount = 1;
+
+            print("Ãæµ¹Áß");
         }
 
         
     }
+
 }
