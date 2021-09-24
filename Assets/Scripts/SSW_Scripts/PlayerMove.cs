@@ -176,14 +176,14 @@ public class PlayerMove : MonoBehaviour
     //    }
     //}
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
-        if (other.gameObject.CompareTag("Ground"))
+        if (collision.gameObject.CompareTag("Ground"))
         {
-            anim.SetBool("jump", false);
+            anim.SetTrigger("New Jump");
             jumpCount = 1;
 
-            print("충돌중");
+            //print("충돌중");
         }
 
         
