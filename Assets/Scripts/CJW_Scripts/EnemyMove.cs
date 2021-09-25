@@ -168,6 +168,8 @@ public class EnemyMove : MonoBehaviour
              
                 SetMoveState();
             }
+
+         
           
         }
         //공격 범위 밖이면
@@ -192,7 +194,7 @@ public class EnemyMove : MonoBehaviour
         anim.SetTrigger("Die");
 
         // 콜라이더를 비활성화한다.
-        GetComponent<CapsuleCollider>().enabled = false;
+        //GetComponent<CapsuleCollider>().enabled = false;
         Invoke("EnemyDestroy", 3.0f);
         }
     }

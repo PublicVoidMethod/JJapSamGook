@@ -1,0 +1,190 @@
+fileFormatVersion: 2
+guid: f2569114d57d3e64da5c20abbe267a38
+ModelImporter:
+  serializedVersion: 20200
+  internalIDToNameTable:
+  - first:
+      74: 4243072347139145516
+    second: flyidle_001
+  - first:
+      74: 452674117437059467
+    second: rideidle_001
+  - first:
+      74: -6272669141935375427
+    second: die_001
+  - first:
+      74: -4221008277080110377
+    second: dieimma_001
+  - first:
+      74: 8868439786966607298
+    second: ridemove_001
+  - first:
+      74: -8713977936171483776
+    second: flymove_001
+  - first:
+      74: 2786997549623003439
+    second: henshin_001
+  - first:
+      74: -8590318360235374626
+    second: rideup_001
+  - first:
+      74: 8646524586421861697
+    second: ridedown_001
+  - first:
+      74: -6963219283314742087
+    second: henshin_002
+  - first:
+      74: -4884860510564142817
+    second: henshin_004
+  - first:
+      74: 6907490409517097591
+    second: show_002
+  - first:
+      74: 1773215572295174346
+    second: sitpose_001
+  - first:
+      74: 8337220389611809965
+    second: ridemove_002
+  - first:
+      74: 3999536090249720188
+    second: conjure_001
+  - first:
+      74: -3279225434059643429
+    second: step_001
+  - first:
+      74: -7392650775143760038
+    second: taunt_001
+  - first:
+      74: -6274290276811109681
+    second: sacred_001
+  - first:
+      74: -6650657824145536430
+    second: wind_001
+  - first:
+      74: -2407232117449495463
+    second: jiehunidle_001
+  - first:
+      74: 1658409390943482948
+    second: jiehunidle_002
+  - first:
+      74: -7102633772158830071
+    second: jiehunwalk_001
+  - first:
+      74: 6969337849131954712
+    second: jiehunwalk_002
+  - first:
+      74: -3893895470869365842
+    second: hug_002_2
+  - first:
+      74: -5449917852839060662
+    second: hug_002_1
+  - first:
+      74: -8243487159229122318
+    second: hug_002_3
+  - first:
+      74: 6185570667704274861
+    second: hug_001_1
+  - first:
+      74: -6083051141036879238
+    second: hug_001_2
+  - first:
+      74: 7733404531662733632
+    second: hug_001_3
+  externalObjects: {}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: "Invalid Avatar Rig Configuration. Missing or invalid transform:\n\tRequired
+      human bone 'Hips' not found\n"
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 3
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 0.01
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 3
+  humanoidOversampling: 1
+  avatarSetup: 1
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
