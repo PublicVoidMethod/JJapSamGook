@@ -5,13 +5,14 @@ using UnityEngine;
 public class SwordAction : MonoBehaviour
 {
     public int attackPower = 10;
-
+    public Animator anim;
     BoxCollider triggerBox;
-
+    
     void Start()
     {
         triggerBox = GetComponent<BoxCollider>();
-    
+        anim = GetComponentInParent<Animator>();
+
     }
 
     void Update()
@@ -32,9 +33,15 @@ public class SwordAction : MonoBehaviour
             enemy.OnHit(attackPower);
         }
 
-        if (other.gameObject.CompareTag("Boss"))  // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+      
+        if (other.gameObject.tag == "Sword")
         {
-            BossStatus.instance.OnDamage(attackPower);  // @@@@@@@@@@@@@@@@@@@@@@@@@@@@
+            print("Į���� �¾Ҵ�");
+            // Ʈ���� �ڽ��� ��Ȱ��ȭ�Ѵ�.
+            //triggerBox.enabled = false;
+
+            // �÷��̾�� �ڽ��� ���ݷ¸�ŭ�� �������� �ش�.
+            anim.SetTrigger("Parry");
         }
     }
 

@@ -1,0 +1,260 @@
+fileFormatVersion: 2
+guid: cb206b09339034249b352227498eec96
+ModelImporter:
+  serializedVersion: 20200
+  internalIDToNameTable: []
+  externalObjects: {}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: "Invalid Avatar Rig Configuration. Missing or invalid transform:\n\tRequired
+      human bone 'LeftLowerLeg' not found\n"
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 3
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human:
+    - boneName: Nyra
+      humanName: Hips
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: polySurface359
+      humanName: LeftUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: polySurface407
+      humanName: RightUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: polySurface358
+      humanName: Spine
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    skeleton:
+    - name: Nyra_Woman_Warrior(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Nyra
+      parentName: Nyra_Woman_Warrior(Clone)
+      position: {x: -0.004047394, y: 0, z: 0.007103958}
+      rotation: {x: 0.00000008146034, y: 0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: polySurface357
+      parentName: Nyra
+      position: {x: 0.0020843863, y: 0.23447251, z: 0.0059654927}
+      rotation: {x: 0.017027682, y: 0.0918873, z: -0.028532661, w: 0.99521494}
+      scale: {x: 1, y: 1, z: 1}
+    - name: polySurface358
+      parentName: Nyra
+      position: {x: 0.002000129, y: 0.23403585, z: 0.005845735}
+      rotation: {x: 0.017027682, y: 0.0918873, z: -0.028532661, w: 0.99521494}
+      scale: {x: 1, y: 1, z: 1}
+    - name: polySurface359
+      parentName: Nyra
+      position: {x: -0.012897459, y: 0.00039895612, z: -0.0065158634}
+      rotation: {x: 0.017027682, y: 0.0918873, z: -0.028532661, w: 0.99521494}
+      scale: {x: 1, y: 1, z: 1}
+    - name: polySurface399
+      parentName: Nyra
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: polySurface407
+      parentName: Nyra
+      position: {x: 0.08733462, y: 0.013166756, z: 0.10303482}
+      rotation: {x: -0.053626988, y: 0.8771475, z: -0.38257313, w: -0.28526184}
+      scale: {x: 1.012781, y: 1.012781, z: 1.012781}
+    - name: polySurface408
+      parentName: Nyra
+      position: {x: -0.018244812, y: 0.17348754, z: 0.010005407}
+      rotation: {x: 0.01706069, y: 0.79014254, z: 0.58982044, w: -0.16581829}
+      scale: {x: 1, y: 1, z: 1}
+    - name: polySurface413
+      parentName: Nyra
+      position: {x: -0.011508265, y: 0.17745979, z: 0.034927204}
+      rotation: {x: 0.01706069, y: 0.79014254, z: 0.58982044, w: -0.16581829}
+      scale: {x: 1, y: 1, z: 1}
+    - name: polySurface423
+      parentName: Nyra
+      position: {x: -0.012897459, y: 0.00039895612, z: -0.0065158634}
+      rotation: {x: 0.017027682, y: 0.0918873, z: -0.028532661, w: 0.99521494}
+      scale: {x: 1, y: 1, z: 1}
+    - name: polySurface426
+      parentName: Nyra
+      position: {x: 0.00017455519, y: 0.24003737, z: -0.006677549}
+      rotation: {x: 0.017027682, y: 0.0918873, z: -0.028532661, w: 0.99521494}
+      scale: {x: 1, y: 1, z: 1}
+    - name: polySurface427
+      parentName: Nyra
+      position: {x: 0.008082653, y: 0.24205495, z: 0.00955716}
+      rotation: {x: 0.017027682, y: 0.0918873, z: -0.028532661, w: 0.99521494}
+      scale: {x: 1, y: 1, z: 1}
+    - name: polySurface435
+      parentName: Nyra
+      position: {x: -0.012897459, y: 0.00039895612, z: -0.0065158634}
+      rotation: {x: 0.017027682, y: 0.0918873, z: -0.028532661, w: 0.99521494}
+      scale: {x: 1, y: 1, z: 1}
+    - name: polySurface437
+      parentName: Nyra
+      position: {x: -0.012897459, y: 0.00039895612, z: -0.0065158634}
+      rotation: {x: 0.017027682, y: 0.0918873, z: -0.028532661, w: 0.99521494}
+      scale: {x: 1, y: 1, z: 1}
+    - name: polySurface461
+      parentName: Nyra
+      position: {x: -0.0027456188, y: 0.24553265, z: -0.018006733}
+      rotation: {x: 0.1261407, y: 0.022639727, z: -0.29668838, w: 0.9463361}
+      scale: {x: 1, y: 1, z: 1}
+    - name: polySurface462
+      parentName: Nyra
+      position: {x: -0.0027456188, y: 0.24553265, z: -0.018006733}
+      rotation: {x: 0.1261407, y: 0.022639727, z: -0.29668838, w: 0.9463361}
+      scale: {x: 1, y: 1, z: 1}
+    - name: polySurface492
+      parentName: Nyra
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: polySurface505
+      parentName: Nyra
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: polySurface519
+      parentName: Nyra
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: polySurface522
+      parentName: Nyra
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: polySurface523
+      parentName: Nyra
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: polySurface525
+      parentName: Nyra
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: polySurface526
+      parentName: Nyra
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: polySurface528
+      parentName: Nyra
+      position: {x: -0.0010635889, y: 0.24263242, z: 0.011494675}
+      rotation: {x: 0.9903316, y: -0.035088968, z: -0.117387235, w: -0.06505687}
+      scale: {x: -1, y: -1, z: -1}
+    - name: polySurface527
+      parentName: Nyra_Woman_Warrior(Clone)
+      position: {x: -0.004047394, y: 0, z: 0.007103958}
+      rotation: {x: 0.00000008146034, y: 0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 3
+  humanoidOversampling: 1
+  avatarSetup: 1
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

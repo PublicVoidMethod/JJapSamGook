@@ -169,6 +169,8 @@ public class EnemyMove : MonoBehaviour
              
                 SetMoveState();
             }
+
+         
           
         }
         //���� ���� ���̸�
@@ -193,7 +195,7 @@ public class EnemyMove : MonoBehaviour
         anim.SetTrigger("Die");
 
         // �ݶ��̴��� ��Ȱ��ȭ�Ѵ�.
-        GetComponent<CapsuleCollider>().enabled = false;
+        //GetComponent<CapsuleCollider>().enabled = false;
         Invoke("EnemyDestroy", 3.0f);
         }
     }
