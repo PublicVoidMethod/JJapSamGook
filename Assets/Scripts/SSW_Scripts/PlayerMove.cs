@@ -13,7 +13,7 @@ public class PlayerMove : MonoBehaviour
     public int livenumber = 1;
     float curTime = 0;
     
-    float jumpCount = 1;
+    public float jumpCount = 1;
    // float attackCount = 4;
     float dashSpeed;
 
@@ -22,13 +22,13 @@ public class PlayerMove : MonoBehaviour
     Animator anim;
 
 
-    public GameObject hitattack;
+   // public GameObject hitattack;
 
     void Start()
     {
         currentHp = maxHp;
         rb = GetComponent<Rigidbody>();
-        hitattack = GameObject.FindGameObjectWithTag("Enemy");
+        //hitattack = GameObject.FindGameObjectWithTag("Enemy");
         anim = GetComponentInChildren<Animator>();
     }
 
@@ -80,15 +80,30 @@ public class PlayerMove : MonoBehaviour
         {
             if (jumpCount > 0)
             {
-                anim.SetBool("jump", true);
+                
                 rb.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
                 jumpCount--;
                 
+
+                if (anim.GetBool("jumpStart") == false)
+                {
+
+                    anim.SetBool("jumpStart", true);
+                }
+                else
+                {
+                    return;
+                }
+                
+
+
+
+
             }
-            else
-            {
-                return;
-            }
+            //else
+            //{
+            //    return;
+            //}
             
         }
 
@@ -125,21 +140,23 @@ public class PlayerMove : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             //SwordBlink_SSW.blink.On();
-            if(hitattack != null)
-            {
+            //if(hitattack != null)
+            //{
 
-                HitAction_SSW attack = hitattack.GetComponentInChildren<HitAction_SSW>();// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-                attack.attackDamage = 0;  // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+                //HitAction_SSW attack = hitattack.GetComponentInChildren<HitAction_SSW>();// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+                //attack.attackDamage = 0;  // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
                 anim.SetTrigger("Attack01");
                 // attackCount--;
                 // print(attackCount);
-            }
-            else
-            {
 
-                anim.SetTrigger("Attack01");
-            }
+                
+            //}
+            //else
+            //{
+
+            //    anim.SetTrigger("Attack01");
+            //}
 
 
         }
@@ -177,14 +194,59 @@ public class PlayerMove : MonoBehaviour
     //    }
     //}
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            anim.SetBool("jump", false);
-            jumpCount = 1;
-        }
 
-        
-    }
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.gameObject.CompareTag("Ground"))
+    //    {
+
+    //        if (anim.GetBool("jumpStart") == true)
+    //        {
+    //            Ray ray = new Ray(transform.position, new Vector3(0, -1, 0));
+    //            RaycastHit hitInfo;
+
+    //            if (Physics.Raycast(ray, out hitInfo))
+    //            {
+    //                print("¹Ù´Ú ÃøÁ¤!!!!!");
+    //                if (hitInfo.distance - 1 < 0.2f)
+    //                {
+    //                    print("¹Ù´Ú ÃøÁ¤!");
+    //                    anim.SetBool("jumpStart", false);
+    //                    jumpCount = 1;
+    //                }
+    //            }
+    //        }
+
+    //    }
+    //}
+
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if (collision.gameObject.CompareTag("Ground"))
+    //    {
+
+    //        if (anim.GetBool("jumpStart") == true)
+    //        {
+    //            Ray ray = new Ray(transform.position, new Vector3(0, -1, 0));
+    //            RaycastHit hitInfo;
+
+    //            if (Physics.Raycast(ray, out hitInfo))
+    //            {
+    //                print("¹Ù´Ú ÃøÁ¤!!!!!");
+    //                if (hitInfo.distance - 1 < 0.2f)
+    //                {
+    //                    print("¹Ù´Ú ÃøÁ¤!");
+    //                    anim.SetBool("jumpStart", false);
+    //                    jumpCount = 1;
+    //                }
+    //            }
+    //        }
+
+    //    }
+
+
+    //}
+
+
+
 }
