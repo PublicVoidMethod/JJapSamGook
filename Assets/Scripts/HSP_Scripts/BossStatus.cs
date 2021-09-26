@@ -55,7 +55,6 @@ public class BossStatus : MonoBehaviour
     public void OnDamage(int bAttackPower)
     {
 
-
         // attackPower만큼 현재 체력에서 깍는다
         bossCurrentHP -= bAttackPower;
 
@@ -67,6 +66,8 @@ public class BossStatus : MonoBehaviour
 
         // 피격 애니메이션을 호출한다.
         bossAnim.SetTrigger("OnHit");
+
+        // 보스의 상태를 Idle로 전환한다.  ?????????????????????
 
         // 보스의 현재 체력이 0이하가 되면
         if(bossCurrentHP <= 0)
