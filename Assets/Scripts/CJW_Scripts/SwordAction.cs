@@ -43,6 +43,11 @@ public class SwordAction : MonoBehaviour
             // �÷��̾�� �ڽ��� ���ݷ¸�ŭ�� �������� �ش�.
             anim.SetTrigger("Parry");
         }
+
+        if (other.gameObject.CompareTag("Boss"))
+        {
+            BossStatus.instance.OnDamage(attackPower);
+        }
     }
 
    
