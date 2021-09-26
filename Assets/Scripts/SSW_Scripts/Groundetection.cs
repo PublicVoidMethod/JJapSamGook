@@ -32,6 +32,7 @@ public class Groundetection : MonoBehaviour
                 {
                     print("¹Ù´Ú ÃøÁ¤!");
                     anim.SetBool("jumpStart", false);
+                    pm.jumpCount = 1;
                     // pm.jumpCount = 0;
                     anim.SetTrigger("JumpLanded");
                    
