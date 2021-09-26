@@ -57,12 +57,12 @@ public class EnemyMove : MonoBehaviour
             default:
                 break;
         }
-        
-        if(curHP == 0)
+
+        if (curHP <= 0 && liveNum == 0)
         {
-            liveNum--;
-            eState =  EnemyState.Die;
+            eState = EnemyState.Die;
         }
+       
         currentTime += Time.deltaTime;
 
 
@@ -95,6 +95,7 @@ public class EnemyMove : MonoBehaviour
     {
         
         Vector3 dir = player.transform.position - transform.position;
+        Vector3 dirPos = new Vector3(dir.x, 0, dir.z);
         float distance = dir.magnitude;
         if (distance <= attackRange)
         {
@@ -113,8 +114,8 @@ public class EnemyMove : MonoBehaviour
         
         dir.Normalize();
         anim.SetTrigger("Run");
-        transform.position += dir * moveSpeed * Time.deltaTime;
-        transform.rotation = Quaternion.LookRotation(dir);
+        transform.position += dirPos * moveSpeed * Time.deltaTime;
+        transform.rotation = Quaternion.LookRotation(dirPos);
     }
 
     public virtual void Attack()
@@ -184,20 +185,21 @@ public class EnemyMove : MonoBehaviour
 
     public void OnHit(int damage)
     {
-        curHP = Mathf.Max(curHP - damage, 0);
-        print(curHP);
+        if (curHP > 0)
+        {
+            anim.SetTrigger("Hit");
+            curHP = Mathf.Max(curHP - damage, 0);
+            liveNum = 0;
+            print(curHP);
+            print("생명 개수:" + liveNum);
+        }
     }
 
     public void Die()
     {
-      if(liveNum ==0)
-        { 
         anim.SetTrigger("Die");
-
-        // �ݶ��̴��� ��Ȱ��ȭ�Ѵ�.
-        //GetComponent<CapsuleCollider>().enabled = false;
         Invoke("EnemyDestroy", 3.0f);
-        }
+        this.enabled = false;
     }
 
     public void EnemyDestroy()

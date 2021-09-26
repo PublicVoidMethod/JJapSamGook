@@ -68,8 +68,10 @@ public class BossFSM : MonoBehaviour
         }
 
         // 보스의 정면 벡터를 플레이어를 향하도록 회전한다.
-        Vector3 dir = (player.position - transform.position).normalized;
-        transform.rotation = Quaternion.LookRotation(dir);
+        Vector3 dir = player.position - transform.position;
+        Vector3 dirPos = new Vector3(dir.x, 0, dir.z);
+        dir.Normalize();
+        transform.rotation = Quaternion.LookRotation(dirPos);
     }
 
     private void Idle()
@@ -108,6 +110,7 @@ public class BossFSM : MonoBehaviour
     {
         // 나는(보스) 플레이어의 방향을 가지고
         Vector3 dir = player.position - transform.position;
+        dir.y = 0;
         dir.Normalize();
 
         // 움직이고 싶다.
