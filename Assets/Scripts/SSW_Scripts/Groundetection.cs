@@ -12,57 +12,40 @@ public class Groundetection : MonoBehaviour
     {
         anim = GetComponentInParent<Animator>();
         pm = GetComponentInParent<PlayerMove>();
-        print("¹Ù´Ú ÃøÁ¤!!!!!");
+        //print("¹Ù´Ú ÃøÁ¤!!!!!");
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        print("¹Ù´Ú ÃøÁ¤!!!!!");
-        if (anim.GetBool("jumpStart") == true)
+       // print("¹Ù´Ú ÃøÁ¤!!!!!");
+        if (anim.GetBool("jumpStart") == true )
         {
-            Ray ray = new Ray(transform.position, new Vector3(0, -3, 0));
+            Ray ray = new Ray(transform.position, new Vector3(0, -1, 0));
             RaycastHit hitInfo;
 
             if (Physics.Raycast(ray, out hitInfo))
             {
                 print("¹Ù´Ú ÃøÁ¤!!!!!");
-                if (hitInfo.distance - 1 < 0.3f)
+                if (hitInfo.distance - 1 < 1.5f)
                 {
                     print("¹Ù´Ú ÃøÁ¤!");
                     anim.SetBool("jumpStart", false);
-                    pm.jumpCount = 1;
+                    // pm.jumpCount = 0;
+                    anim.SetTrigger("JumpLanded");
+                   
+
+                
                 }
             }
+        }
+        else
+        {
+            return;
         }
 
     }
 
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    print("¹Ù´Ú ÃøÁ¤!!!!!!!!!!!");
 
-    //    if (other.gameObject.CompareTag("Ground"))
-    //    {
-
-    //        if (anim.GetBool("jumpStart") == true)
-    //        {
-    //            Ray ray = new Ray(transform.position, new Vector3(0, -3, 0));
-    //            RaycastHit hitInfo;
-
-    //            if (Physics.Raycast(ray, out hitInfo))
-    //            {
-    //                print("¹Ù´Ú ÃøÁ¤!!!!!");
-    //                if (hitInfo.distance-1 < 0.3f)
-    //                {
-    //                    print("¹Ù´Ú ÃøÁ¤!");
-    //                    anim.SetBool("jumpStart", false);
-    //                    pm.jumpCount = 1;
-    //                }
-    //            }
-    //        }
-
-    //    }
-    //}
 }
