@@ -10,6 +10,7 @@ public class BloodEffect_L : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+            print("닿았다");
         // 만약 부딪힌 대상의 이름이 AttackRange를 포함하고 있다면
         if (other.gameObject.name.Contains("AttackRange"))
         {
