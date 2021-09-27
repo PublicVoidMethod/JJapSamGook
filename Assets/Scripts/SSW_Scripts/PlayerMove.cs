@@ -71,7 +71,7 @@ public class PlayerMove : MonoBehaviour
             GetComponent<CapsuleCollider>().enabled = false;
             rb.useGravity = false;
             anim.SetTrigger("Die");
-            
+            this.enabled = false;
 
         }
     }
@@ -91,16 +91,8 @@ public class PlayerMove : MonoBehaviour
                 rb.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);             
                 jumpCount--;
                 
-
-                if (anim.GetBool("jumpStart") == false)
-                {
-
-                    anim.SetBool("jumpStart", true);
-                }
-                else
-                {
-                    return;
-                }                
+                anim.SetTrigger("jumpStart");
+                anim.ResetTrigger("JumpLanded");
 
             }
 
@@ -146,18 +138,18 @@ public class PlayerMove : MonoBehaviour
 
 
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Ground"))
-        {
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.gameObject.CompareTag("Ground"))
+    //    {
             
            print("�ٴ� ����!");
            jumpCount = 1;
 
-            print(jumpCount);
+    //        print(jumpCount);
                     
-        }
-    }
+    //    }
+    //}
 
 
 

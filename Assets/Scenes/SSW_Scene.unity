@@ -269,7 +269,7 @@ Transform:
   m_GameObject: {fileID: 334751029}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 1, y: 1.8262737, z: 1}
+  m_LocalScale: {x: 1, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 377895610}
   m_RootOrder: 2
@@ -675,12 +675,16 @@ PrefabInstance:
       value: Player_SSW1
       objectReference: {fileID: 0}
     - target: {fileID: 4747192944949301221, guid: 27c255c13e2a04d48810c2bfe87339d6, type: 3}
+      propertyPath: maxHp
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4747192944949301221, guid: 27c255c13e2a04d48810c2bfe87339d6, type: 3}
       propertyPath: hitattack
       value: 
       objectReference: {fileID: 105306974692662625}
     - target: {fileID: 4747192944949301221, guid: 27c255c13e2a04d48810c2bfe87339d6, type: 3}
       propertyPath: jumpPower
-      value: 3
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4747192944949301221, guid: 27c255c13e2a04d48810c2bfe87339d6, type: 3}
       propertyPath: rotationSpeed
@@ -794,7 +798,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7385803925499134636, guid: 06efebdafb5d13842834426291139ef2, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 06efebdafb5d13842834426291139ef2, type: 3}
