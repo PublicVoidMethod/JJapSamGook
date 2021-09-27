@@ -143,8 +143,8 @@ public class PlayerMove : MonoBehaviour
     //    if (other.gameObject.CompareTag("Ground"))
     //    {
             
-           print("�ٴ� ����!");
-           jumpCount = 1;
+           //print("�ٴ� ����!");
+           //jumpCount = 1;
 
     //        print(jumpCount);
                     
