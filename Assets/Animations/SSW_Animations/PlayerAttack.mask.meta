@@ -1,5 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: fd4566632065a6746a7e3f115da4d510
+=======
+<<<<<<< HEAD:Assets/Animation/HSP_Animation/BossController.controller.meta
+guid: a23b931bd4a630648946375f9f5c7b5c
+=======
+guid: fd4566632065a6746a7e3f115da4d510
+>>>>>>> SSW:Assets/Animations/SSW_Animations/PlayerAttack.mask.meta
+>>>>>>> SSW
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 31900000
