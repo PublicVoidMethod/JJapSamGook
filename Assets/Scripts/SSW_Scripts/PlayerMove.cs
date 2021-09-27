@@ -134,25 +134,4 @@ public class PlayerMove : MonoBehaviour
     }
 
   
-
-
-
-
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if (other.gameObject.CompareTag("Ground"))
-    //    {
-            
-    //       print("¹Ù´Ú ÃøÁ¤!");
-    //       jumpCount = 1;
-
-    //        print(jumpCount);
-                    
-    //    }
-    //}
-
-
-
-
-
 }
