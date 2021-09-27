@@ -2904,7 +2904,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58d3d9a715a46a741a85edd1f2d6e1ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bossMaxHP: 100000
+  bossMaxHP: 100
   bossHPSlider: {fileID: 641078166}
   bossCurrentHP: 0
 --- !u!1 &641078164
