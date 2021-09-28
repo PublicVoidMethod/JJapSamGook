@@ -72,6 +72,13 @@ public class BossFSM : MonoBehaviour
         dir.y = 0;
         dir.Normalize();
         transform.rotation = Quaternion.LookRotation(dir);
+
+        // 보스의 체력이 0이 되면
+        if(BossStatus.instance.bossCurrentHP <= 0)
+        {
+            // 스크립트를 비활성화 시킨다.
+            this.enabled = false;
+        }
     }
 
     private void Idle()
