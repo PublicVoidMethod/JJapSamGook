@@ -12,9 +12,14 @@ public class PlayerMove : MonoBehaviour
     public float jumpPower = 10;
     public int livenumber = 1;
     float curTime = 0;
-    
+    //���Ӱ��� ���� ����
+    //public int noOfClicks = 0;
+    //float lastClickedTime = 0;
+    //public float maxComboDelay = 0.9f;
+    public float rotationSpeed = 8;
     public float jumpCount = 1;
-   // float attackCount = 4;
+
+    //public float yVelocity = 0;
     float dashSpeed;
 
     public Rigidbody rb;
@@ -28,7 +33,7 @@ public class PlayerMove : MonoBehaviour
     {
         currentHp = maxHp;
         rb = GetComponent<Rigidbody>();
-        //hitattack = GameObject.FindGameObjectWithTag("Enemy");
+       
         anim = GetComponentInChildren<Animator>();
     }
 
@@ -38,7 +43,7 @@ public class PlayerMove : MonoBehaviour
         dashSpeed = moveSpeed;
         //isJumping = false;
         Move();
-        //GeneralAttack();
+       
         if(currentHp == 0)
         {
             livenumber--;
@@ -66,7 +71,7 @@ public class PlayerMove : MonoBehaviour
             GetComponent<CapsuleCollider>().enabled = false;
             rb.useGravity = false;
             anim.SetTrigger("Die");
-            
+            this.enabled = false;
 
         }
     }
@@ -78,32 +83,19 @@ public class PlayerMove : MonoBehaviour
         // ����      
         if (Input.GetButtonDown("Jump") )
         {
+            print(jumpCount + "after");
             if (jumpCount > 0)
             {
-                
-                rb.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
+                //yVelocity = jumpPower;
+                //transform.position +=  * jumpPower * Time.deltaTime;
+                rb.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);             
                 jumpCount--;
                 
-
-                if (anim.GetBool("jumpStart") == false)
-                {
-
-                    anim.SetBool("jumpStart", true);
-                }
-                else
-                {
-                    return;
-                }
-                
-
-
-
+                anim.SetTrigger("jumpStart");
+                anim.ResetTrigger("JumpLanded");
 
             }
-            //else
-            //{
-            //    return;
-            //}
+
             
         }
 
@@ -120,11 +112,14 @@ public class PlayerMove : MonoBehaviour
         {
             Vector3 rot = dir;
             rot.y = 0;
-            transform.rotation = Quaternion.LookRotation(rot);
+            Quaternion newRotation = Quaternion.LookRotation(rot);
+            transform.rotation = Quaternion.Slerp(transform.rotation, newRotation, rotationSpeed * Time.deltaTime);                                                                                                              
+
         }
 
+        //������
         curTime += Time.deltaTime;
-        if (Input.GetKeyDown(KeyCode.LeftShift) && curTime > 0.3f )
+        if (Input.GetKeyDown(KeyCode.LeftShift) && curTime > 0.3f && dir != Vector3.zero )
         {
             curTime = 0;
             anim.SetTrigger("Roll");
@@ -136,117 +131,7 @@ public class PlayerMove : MonoBehaviour
         transform.position += dir * dashSpeed * Time.deltaTime;
 
 
-        // ��Ÿ 
-        if (Input.GetMouseButtonDown(0))
-        {
-            //SwordBlink_SSW.blink.On();
-            //if(hitattack != null)
-            //{
-
-                //HitAction_SSW attack = hitattack.GetComponentInChildren<HitAction_SSW>();// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-                //attack.attackDamage = 0;  // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
-                anim.SetTrigger("Attack01");
-                // attackCount--;
-                // print(attackCount);
-
-                
-            //}
-            //else
-            //{
-
-            //    anim.SetTrigger("Attack01");
-            //}
-
-
-        }
-            //SwordBlink_SSW.blink.Off();
-
-
-
     }
 
-    //public void GeneralAttack()
-    //{
-    //    if (Input.GetMouseButton(0) && attackCount > 0)
-    //    {
-    //        anim.SetTrigger("Attack01");
-    //        attackCount--;
-    //        print(attackCount);
-    //    }
-    //    else if (attackCount < 3)
-    //    {
-    //        anim.SetTrigger("Attack02");
-    //        attackCount--;
-    //        print("����1");
-    //    }
-    //    else if (attackCount < 2)
-    //    {
-    //        anim.SetTrigger("Attack03");
-    //        attackCount--;
-    //        print("����2");
-    //    }
-    //    else if (attackCount < 1)
-    //    {
-    //        anim.SetTrigger("Attack04");
-    //        attackCount = 4;
-    //        print("����3");
-    //    }
-    //}
-
-
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if (other.gameObject.CompareTag("Ground"))
-    //    {
-
-    //        if (anim.GetBool("jumpStart") == true)
-    //        {
-    //            Ray ray = new Ray(transform.position, new Vector3(0, -1, 0));
-    //            RaycastHit hitInfo;
-
-    //            if (Physics.Raycast(ray, out hitInfo))
-    //            {
-    //                print("�ٴ� ����!!!!!");
-    //                if (hitInfo.distance - 1 < 0.2f)
-    //                {
-    //                    print("�ٴ� ����!");
-    //                    anim.SetBool("jumpStart", false);
-    //                    jumpCount = 1;
-    //                }
-    //            }
-    //        }
-
-    //    }
-    //}
-
-    //private void OnCollisionEnter(Collision collision)
-    //{
-    //    if (collision.gameObject.CompareTag("Ground"))
-    //    {
-
-    //        if (anim.GetBool("jumpStart") == true)
-    //        {
-    //            Ray ray = new Ray(transform.position, new Vector3(0, -1, 0));
-    //            RaycastHit hitInfo;
-
-    //            if (Physics.Raycast(ray, out hitInfo))
-    //            {
-    //                print("�ٴ� ����!!!!!");
-    //                if (hitInfo.distance - 1 < 0.2f)
-    //                {
-    //                    print("�ٴ� ����!");
-    //                    anim.SetBool("jumpStart", false);
-    //                    jumpCount = 1;
-    //                }
-    //            }
-    //        }
-
-    //    }
-
-
-    //}
-
-
-
+  
 }

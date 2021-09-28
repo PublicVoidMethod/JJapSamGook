@@ -16,7 +16,7 @@ public class CameraType2_SSW : MonoBehaviour
 
     }
 
-    void Update()
+    private void LateUpdate()
     {
         //target = player.transform.forward * offset.z + player.transform.up * offset.y;
         target = player.position + player.forward + player.up + offset;
@@ -27,4 +27,5 @@ public class CameraType2_SSW : MonoBehaviour
         Vector3 lookDir = (player.position + camOffset - transform.position).normalized;
         transform.forward = lookDir;
     }
+    
 }
