@@ -110,6 +110,54 @@ ModelImporter:
         value: {x: 0, y: 0, z: 0}
         length: 0
         modified: 0
+    - boneName: polySurface525
+      humanName: Chest
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: polySurface408
+      humanName: UpperChest
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: polySurface519
+      humanName: LeftShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: polySurface462
+      humanName: LeftUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: polySurface523
+      humanName: LeftLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: polySurface523
+      humanName: LeftHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
     skeleton:
     - name: Nyra_Woman_Warrior(Clone)
       parentName: 
@@ -131,6 +179,21 @@ ModelImporter:
       position: {x: 0.002000129, y: 0.23403585, z: 0.005845735}
       rotation: {x: 0.017027682, y: 0.0918873, z: -0.028532661, w: 0.99521494}
       scale: {x: 1, y: 1, z: 1}
+    - name: polySurface525
+      parentName: polySurface358
+      position: {x: 0.011670807, y: -0.2338064, z: 0.0030517224}
+      rotation: {x: -0.017027682, y: -0.0918873, z: 0.028532661, w: 0.99521494}
+      scale: {x: 1, y: 1, z: 1}
+    - name: polySurface408
+      parentName: polySurface525
+      position: {x: -0.018244812, y: 0.17348754, z: 0.010005409}
+      rotation: {x: 0.017060686, y: 0.7901425, z: 0.5898204, w: -0.16581829}
+      scale: {x: 1, y: 1, z: 1}
+    - name: polySurface519
+      parentName: polySurface408
+      position: {x: 0.009203786, y: -0.057886638, z: -0.16460662}
+      rotation: {x: -0.017060686, y: -0.7901425, z: -0.5898204, w: -0.16581829}
+      scale: {x: 1, y: 1, z: 1}
     - name: polySurface359
       parentName: Nyra
       position: {x: -0.012897459, y: 0.00039895612, z: -0.0065158634}
@@ -146,11 +209,6 @@ ModelImporter:
       position: {x: 0.08733462, y: 0.013166756, z: 0.10303482}
       rotation: {x: -0.053626988, y: 0.8771475, z: -0.38257313, w: -0.28526184}
       scale: {x: 1.012781, y: 1.012781, z: 1.012781}
-    - name: polySurface408
-      parentName: Nyra
-      position: {x: -0.018244812, y: 0.17348754, z: 0.010005407}
-      rotation: {x: 0.01706069, y: 0.79014254, z: 0.58982044, w: -0.16581829}
-      scale: {x: 1, y: 1, z: 1}
     - name: polySurface413
       parentName: Nyra
       position: {x: -0.011508265, y: 0.17745979, z: 0.034927204}
@@ -201,22 +259,12 @@ ModelImporter:
       position: {x: -0, y: 0, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
-    - name: polySurface519
-      parentName: Nyra
-      position: {x: -0, y: 0, z: 0}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
     - name: polySurface522
       parentName: Nyra
       position: {x: -0, y: 0, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: polySurface523
-      parentName: Nyra
-      position: {x: -0, y: 0, z: 0}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: polySurface525
       parentName: Nyra
       position: {x: -0, y: 0, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
