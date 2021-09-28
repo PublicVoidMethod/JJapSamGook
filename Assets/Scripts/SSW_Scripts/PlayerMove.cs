@@ -117,9 +117,9 @@ public class PlayerMove : MonoBehaviour
 
         }
 
-        //구르기
+        //구르기 && dir != Vector3.zero
         curTime += Time.deltaTime;
-        if (Input.GetKeyDown(KeyCode.LeftShift) && curTime > 0.3f && dir != Vector3.zero )
+        if (Input.GetKeyDown(KeyCode.LeftShift) && curTime > 0.3f && dir != Vector3.zero)
         {
             curTime = 0;
             anim.SetTrigger("Roll");
