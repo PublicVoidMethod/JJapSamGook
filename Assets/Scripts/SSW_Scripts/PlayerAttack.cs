@@ -42,8 +42,9 @@ public class PlayerAttack : MonoBehaviour
         if (noOfClicks >= 2)
         {
             anim.SetBool("Attack02", true);
+            //anim.SetBool("Attack01", false);
         }
-        else
+        else if(noOfClicks < 2)
         {
             anim.SetBool("Attack01", false);
             noOfClicks = 0;
@@ -55,8 +56,9 @@ public class PlayerAttack : MonoBehaviour
         if (noOfClicks >= 3)
         {
             anim.SetBool("Attack03", true);
+            //anim.SetBool("Attack02", false);
         }
-        else
+        else if(noOfClicks < 3)
         {
             anim.SetBool("Attack02", false);
             noOfClicks = 0;
@@ -68,6 +70,7 @@ public class PlayerAttack : MonoBehaviour
         if (noOfClicks >= 4)
         {
             anim.SetBool("Attack04", true);
+            //anim.SetBool("Attack03", false);
         }
         else
         {

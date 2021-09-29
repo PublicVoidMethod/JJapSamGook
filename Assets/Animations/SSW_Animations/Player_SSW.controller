@@ -11,7 +11,7 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: 4750109032467989389}
-    m_Position: {x: 530, y: -60, z: 0}
+    m_Position: {x: 530, y: -70, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 4149884927648476563}
     m_Position: {x: 1080, y: 120, z: 0}
@@ -29,7 +29,7 @@ AnimatorStateMachine:
     m_Position: {x: 850, y: 470, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 755776112538714141}
-    m_Position: {x: 1080, y: 10, z: 0}
+    m_Position: {x: 1080, y: 0, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -4471007503756216288}
     m_Position: {x: 1080, y: -130, z: 0}
@@ -149,9 +149,9 @@ BlendTree:
     m_Threshold: 0
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
-    m_CycleOffset: 0
+    m_CycleOffset: 0.5
     m_DirectBlendParameter: Horizontal
-    m_Mirror: 0
+    m_Mirror: 1
   - serializedVersion: 2
     m_Motion: {fileID: 7400000, guid: 14b7a73f70b96b14e9e46a4f15c5fcb1, type: 2}
     m_Threshold: 0.25
@@ -298,7 +298,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Attack03
-  m_Speed: 3
+  m_Speed: 2
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -776034831068405911}
@@ -442,9 +442,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.0740065
-  m_TransitionOffset: 0.006145653
-  m_ExitTime: 0.8420691
+  m_TransitionDuration: 0.06888878
+  m_TransitionOffset: 0.033199523
+  m_ExitTime: 0.9673216
   m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -716,7 +716,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Attack02
-  m_Speed: 5
+  m_Speed: 2
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 3751360265941153930}
@@ -828,9 +828,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0
-  m_TransitionOffset: 0.007485877
-  m_ExitTime: 1.0134888
+  m_TransitionDuration: 0.009293675
+  m_TransitionOffset: 0.007485869
+  m_ExitTime: 0.9970882
   m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -844,7 +844,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Attack
-  m_Speed: 2
+  m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 9212663942871727681}
