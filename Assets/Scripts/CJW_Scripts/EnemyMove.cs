@@ -11,7 +11,9 @@ public class EnemyMove : MonoBehaviour
         Idle,
         Move,
         Attack,
-            Die
+        Die,
+        ComboDamaged,
+        Throw
     }
 
     public EnemyState eState;
@@ -54,6 +56,12 @@ public class EnemyMove : MonoBehaviour
             case EnemyState.Die:
                 Die();
                 break;
+            case EnemyState.ComboDamaged:
+                ComboDamaged();
+                break;
+            case EnemyState.Throw:
+                Throw();
+                break;
             default:
                 break;
         }
@@ -66,6 +74,16 @@ public class EnemyMove : MonoBehaviour
         currentTime += Time.deltaTime;
 
 
+    }
+
+    private void Throw()
+    {
+        throw new NotImplementedException();
+    }
+
+    private void ComboDamaged()
+    {
+        throw new NotImplementedException();
     }
 
     private void Idle()
@@ -195,8 +213,14 @@ public class EnemyMove : MonoBehaviour
         { 
         anim.SetTrigger("Die");
 
-        // �ݶ��̴��� ��Ȱ��ȭ�Ѵ�.
-        //GetComponent<CapsuleCollider>().enabled = false;
+            // �ݶ��̴��� ��Ȱ��ȭ�Ѵ�.
+            //GetComponent<CapsuleCollider>().enabled = false;
+
+            GameObject sword = transform.GetComponentInChildren<SwordItem>().gameObject;
+            sword.transform.parent = null;
+            sword.GetComponent<BoxCollider>().isTrigger = false;
+            sword.AddComponent<Rigidbody>();
+
         Invoke("EnemyDestroy", 3.0f);
         }
     }

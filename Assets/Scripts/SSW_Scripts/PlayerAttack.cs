@@ -8,11 +8,13 @@ public class PlayerAttack : MonoBehaviour
     public int noOfClicks = 0;
     float lastClickedTime = 0;
     public float maxComboDelay = 0.9f;
+    PlayerMove playermove;
 
     Animator anim;
     void Start()
     {
         anim = GetComponent<Animator>();
+        playermove = GetComponentInParent<PlayerMove>();
     }
 
     // Update is called once per frame
@@ -35,6 +37,20 @@ public class PlayerAttack : MonoBehaviour
             noOfClicks = Mathf.Clamp(noOfClicks, 0, 4);
 
         }
+
+        if (Input.GetKeyDown(KeyCode.R))
+            {
+           
+            playermove.enabled = false;
+            anim.SetTrigger("Special");
+            Invoke("playerMoveOff", 1.0f);
+        }
+        
+    }
+    
+    void playerMoveOff()
+    {
+        playermove.enabled = true;
     }
 
     public void return1()
@@ -85,4 +101,6 @@ public class PlayerAttack : MonoBehaviour
         noOfClicks = 0;
 
     }
+
+   
 }
