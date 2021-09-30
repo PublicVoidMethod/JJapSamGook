@@ -21,32 +21,32 @@ public class Groundetection : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        curTime += Time.deltaTime;
-        // print("¹Ù´Ú ÃøÁ¤!!!!!");
-        if (anim.GetBool("jumpStart") == true && pm.rb.velocity.y < 0 && curTime > 0.5f )
-        {
-            //curTime = 0;
-            Ray ray = new Ray(transform.position, new Vector3(0, -1, 0));
-            RaycastHit hitInfo;
+        //curTime += Time.deltaTime;
+        //// print("¹Ù´Ú ÃøÁ¤!!!!!");
+        //if (anim.GetBool("jumpStart") == true && pm.rb.velocity.y < 0 && curTime > 0.5f )
+        //{
+        //    //curTime = 0;
+        //    Ray ray = new Ray(transform.position, new Vector3(0, -1, 0));
+        //    RaycastHit hitInfo;
 
-            if (Physics.Raycast(ray, out hitInfo))
-            {
-                if (hitInfo.distance  < 2.6f)
-                {
-                    print(hitInfo.distance);
-                    anim.SetBool("jumpStart", false);
-                    pm.jumpCount = 1;
-                    // pm.jumpCount = 0;
+        //    if (Physics.Raycast(ray, out hitInfo))
+        //    {
+        //        if (hitInfo.distance  < 2.6f)
+        //        {
+        //            print(hitInfo.distance);
+        //            anim.SetBool("jumpStart", false);
+        //            pm.jumpCount = 1;
+        //            // pm.jumpCount = 0;
                    
 
                 
-                }
-            }
-        }
-        else
-        {
-            return;
-        }
+        //        }
+        //    }
+        //}
+        //else
+        //{
+        //    return;
+        //}
 
     }
 

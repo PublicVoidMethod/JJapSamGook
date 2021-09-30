@@ -8,11 +8,13 @@ public class PlayerAttack : MonoBehaviour
     public int noOfClicks = 0;
     float lastClickedTime = 0;
     public float maxComboDelay = 0.9f;
+    public PlayerMove pm;
 
     Animator anim;
     void Start()
     {
         anim = GetComponent<Animator>();
+        pm = GetComponentInParent<PlayerMove>();
     }
 
     // Update is called once per frame
@@ -24,6 +26,7 @@ public class PlayerAttack : MonoBehaviour
             noOfClicks = 0;
         }
 
+        AnimatorStateInfo animState = anim.GetCurrentAnimatorStateInfo(0);
         if (Input.GetMouseButtonDown(0))
         {
             lastClickedTime = Time.time;
@@ -31,10 +34,23 @@ public class PlayerAttack : MonoBehaviour
             if (noOfClicks == 1)
             {
                 anim.SetBool("Attack01", true);
+                StartCoroutine(attack1());
+                print(pm.dashSpeed);
             }
             noOfClicks = Mathf.Clamp(noOfClicks, 0, 4);
 
+            //@@@@@@
+            if(noOfClicks >= 2)
+            {
+                StopAllCoroutines();
+            }
         }
+    }
+
+    IEnumerator attack1()
+    {
+        yield return null;
+        pm.dashSpeed = pm.moveSpeed * 1 / 5;
     }
 
     public void return1()

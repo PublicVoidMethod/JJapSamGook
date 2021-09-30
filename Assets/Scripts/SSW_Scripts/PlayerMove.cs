@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,7 +21,7 @@ public class PlayerMove : MonoBehaviour
     public float jumpCount = 1;
 
     //public float yVelocity = 0;
-    float dashSpeed;
+    public float dashSpeed;
 
     public Rigidbody rb;
 
@@ -29,6 +30,16 @@ public class PlayerMove : MonoBehaviour
 
    // public GameObject hitattack;
 
+    public enum PlayerFSM
+    {
+        Normal,
+        Idle,
+        Damaged,
+        Attack,
+        Die
+    }
+
+    public PlayerFSM pState;
     void Start()
     {
         currentHp = maxHp;
@@ -40,17 +51,62 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
+        switch (pState)
+        {
+            case PlayerFSM.Normal:
+                Normal();
+                break;
+            case PlayerFSM.Idle:
+                Idle();
+                break;
+            case PlayerFSM.Damaged:
+                Damaged();
+                break;
+            case PlayerFSM.Attack:
+                Attack();
+                break;
+            case PlayerFSM.Die:
+                Die();
+                break;
+        }
+
+
         dashSpeed = moveSpeed;
         //isJumping = false;
         Move();
        
-        if(currentHp == 0)
+        
+
+    }
+    private void Normal()
+    {
+        throw new NotImplementedException();
+    }
+
+    private void Idle()
+    {
+        throw new NotImplementedException();
+    }
+
+    private void Damaged()
+    {
+        throw new NotImplementedException();
+    }
+
+    private void Attack()
+    {
+        throw new NotImplementedException();
+    }
+
+    private void Die()
+    {
+        if (currentHp == 0)
         {
             livenumber--;
             DiePlayer();
         }
-       
     }
+
 
     // 피격 데미지 + 애니메이션
     public void DamageProcess(float damage)
@@ -133,5 +189,5 @@ public class PlayerMove : MonoBehaviour
 
     }
 
-  
+
 }
