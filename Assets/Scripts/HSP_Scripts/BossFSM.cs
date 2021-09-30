@@ -17,6 +17,7 @@ public class BossFSM : MonoBehaviour
     Animator bossAnim;  // 보스의 애니메이터 변수
 
     bool isbooked = false;
+    bool attackmotion = false;  // 보스가 공격 상태로 전환되는 변수. true(공격상태) false(비공격상태)
 
     // 보스의 열거형 상수
     public enum BossState
@@ -24,6 +25,7 @@ public class BossFSM : MonoBehaviour
         Idle,
         Move,
         Attack,
+        Skill,
         Damaged,
         Die
     }
@@ -57,11 +59,11 @@ public class BossFSM : MonoBehaviour
             case BossState.Attack:
                 Attack();
                 break;
+            case BossState.Skill:
+                Skill();
+                break;
             case BossState.Damaged:
                 Damaged();
-                break;
-            case BossState.Die:
-                Die();
                 break;
             default:
                 break;
@@ -85,7 +87,7 @@ public class BossFSM : MonoBehaviour
     {
         // 플레이어의 포지션과 나(보스)의 포지션의 거리가 시야 범위보다 작다면
         // (=플레이어가 보스의 시야 안으로 들어갔다면)
-        if(Vector3.Distance(player.position, transform.position) < sightDistance)
+        if (Vector3.Distance(player.position, transform.position) < sightDistance)
         {
             Vector3 lookPlayer = (player.position - transform.position).normalized;  // ???????????????? why noramlized?
 
@@ -93,13 +95,13 @@ public class BossFSM : MonoBehaviour
             float cosValue = Vector3.Dot(transform.forward, lookPlayer);
 
             // 내적의 결과가 양수라면(즉, 플레이어가 앞에 있다면)
-            if(cosValue > 0)
+            if (cosValue > 0)
             {
                 // 나의 정면 벡터와 플레이어를 바라보는 벡터와의 사잇각을 구한다.  ??????????????????????
                 float degree = Mathf.Acos(cosValue) * Mathf.Rad2Deg;
 
                 // 만약 보스의 시야각 안으로 들어왔다면
-                if(degree < sightDegree)
+                if (degree < sightDegree)
                 {
                     bossHPBar.SetActive(true);
 
@@ -127,40 +129,50 @@ public class BossFSM : MonoBehaviour
         //if (attackRange > Vector3.Distance(player.position, transform.position))
         if (attackRange > (player.position - transform.position).magnitude)
         {
+            // 무브 애니메이션 호출
+            bossAnim.SetTrigger("RunToAttack");
+            print("공격해");
             // 이동을 멈추고
             bossRB.velocity = Vector3.zero;
             
             // 어택 상태로 전환한다.
             bState = BossState.Attack;
 
-            // 공격 애니메이션을 실행한다.
-            bossAnim.SetTrigger("MoveToAttack");
+            //// 공격 애니메이션을 실행한다.  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+            //bossAnim.SetTrigger("MoveToAttack");  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
         }
     }
 
     private void Attack()
     {
-        // 만약 나(보스)와 플레이어와의 거리가 평타 공격 범위보다 멀어지면(평타 공격 범위 < 나와 플레이어의 거리)
-        if(attackRange < (player.position - transform.position).magnitude)
+        if (attackmotion == false)
         {
-            if (!isbooked)
+            // 만약 나(보스)와 플레이어와의 거리가 평타 공격 범위보다 멀어지면(평타 공격 범위 < 나와 플레이어의 거리)
+            if (attackRange < (player.position - transform.position).magnitude)
             {
-                // Move상태로 1.5초 후에 전환한다.
-                Invoke("SetMoveState", 1.5f);
-                //return;
-                isbooked = true;
+                bossAnim.SetTrigger("AttackToIdle");
+                if (!isbooked)
+                {
+                    // Move상태로 1.5초 후에 전환한다.
+                    Invoke("SetMoveState", 0.5f);
+                    //return;
 
-                //bossAnim.SetTrigger("IdleToMove");
+                    //bossAnim.SetTrigger("IdleToMove");
+                }
+            }
+            else
+            {
+                AttackPattern();
             }
         }
     }
 
-    private void Damaged()
+    private void Skill()
     {
-
+        
     }
 
-    private void Die()
+    private void Damaged()
     {
 
     }
@@ -216,5 +228,64 @@ public class BossFSM : MonoBehaviour
         {
             Gizmos.DrawLine(transform.position, transform.position + sightPos[i]);
         }
+    }
+
+    /// <summary>
+    /// 보스의 공격 패턴을 랜덤으로 실행 시키는 함수
+    /// </summary>
+    void AttackPattern()
+    {
+        int randomAttack = UnityEngine.Random.Range(0, 4);
+        switch (randomAttack)
+        {
+            case 0:
+                // 공격 패턴 0
+                StartCoroutine(Attack_00());
+                break;
+            case 1:
+                // 공격 패턴 1
+                StartCoroutine(Attack_01());
+                break;
+            case 2:
+                // 공격 패턴 2
+                StartCoroutine(Attack_02());
+                break;
+            case 3:
+                // 공격 패턴 3
+                StartCoroutine(Attack_03());
+                break;
+        }
+    }
+
+    IEnumerator Attack_00()
+    {
+        attackmotion = true;
+        bossAnim.SetTrigger("Pattern_00");
+        yield return new WaitForSeconds(2.15f);
+        attackmotion = false;
+    }
+
+    IEnumerator Attack_01()
+    {
+        attackmotion = true;
+        bossAnim.SetTrigger("Pattern_01");
+        yield return new WaitForSeconds(3.40f);
+        attackmotion = false;
+    }
+
+    IEnumerator Attack_02()
+    {
+        attackmotion = true;
+        bossAnim.SetTrigger("Pattern_02");
+        yield return new WaitForSeconds(3.0f);
+        attackmotion = false;
+    }
+
+    IEnumerator Attack_03()
+    {
+        attackmotion = true;
+        bossAnim.SetTrigger("Pattern_03");
+        yield return new WaitForSeconds(3.8f);
+        attackmotion = false;
     }
 }

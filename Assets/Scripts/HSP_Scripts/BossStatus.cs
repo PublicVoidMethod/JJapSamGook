@@ -44,7 +44,7 @@ public class BossStatus : MonoBehaviour
 
     void Update()
     {
-
+        
     }
 
     /// <summary>
@@ -85,6 +85,12 @@ public class BossStatus : MonoBehaviour
 
             // 피격 이펙트를 비활성화 한다.
             bloodEffect.SetActive(false);
+        }
+        // 보스의 현재 체력이 30% ~50%일때
+        else if ((float)bossCurrentHP / (float)bossMaxHP > 0.3 && (float)bossCurrentHP / (float)bossMaxHP < 0.5)
+        {
+            print("난 스킬을 쓸꺼야");
+            bossFSM.bState = BossFSM.BossState.Skill;
         }
     }
 }
