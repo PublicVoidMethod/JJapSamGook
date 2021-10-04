@@ -9,6 +9,7 @@ public class BossStatus : MonoBehaviour
     
     public int bossMaxHP = 100;  // 보스의 최대체력 변수
     public int bossCurrentHP = 0;  // 보스의 현재 체력 변수
+    public int bossAttackPower = 10;  // 보스의 기본 공격력
 
     public Slider bossHPSlider;  // 보스 체력바 슬라이더 변수
     public GameObject bloodEffect;  // 보스가 죽을 때 피격 콜라이더가 붙은 오브젝트를 비활성화 시킬 변수
@@ -91,6 +92,7 @@ public class BossStatus : MonoBehaviour
         {
             print("난 스킬을 쓸꺼야");
             bossFSM.bState = BossFSM.BossState.Skill;
+            
         }
     }
 }

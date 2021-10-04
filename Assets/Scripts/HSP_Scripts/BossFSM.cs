@@ -11,13 +11,20 @@ public class BossFSM : MonoBehaviour
     public float attackRange = 2.0f;  // 보스의 평타 공격 범위
 
     public GameObject bossHPBar;  // 보스 HP바를 SetActive 할 수 있게 만든 변수
+    public GameObject[] bossSkillEffect = new GameObject[3];  // 보스 스킬 이펙트
+    public GameObject bossSword;  // 보스의 검을 가지고 올 변수
 
     Transform player;  // "Player" 태그를 찾기위한 변수
     Rigidbody bossRB;  // 보스의 리지드 바디 변수
     Animator bossAnim;  // 보스의 애니메이터 변수
+    BossSkillSensor bossSkill;  // BossSkillSensor 스크립트를 거져올 변수
+    GameObject bsc;  // BossSkillCollider의 게임 오브젝트를 넣을 변수
+    CapsuleCollider capsulcollier;
+    //ParticleSystem bossSkillParticle;  // 파티클 시스템을 넣을 변수
 
     bool isbooked = false;
     bool attackmotion = false;  // 보스가 공격 상태로 전환되는 변수. true(공격상태) false(비공격상태)
+    bool isSkillCollider = false;  // 보스의 스킬의 콜라이더가 켜졌는지 꺼졌는지 체크하는 변수.
 
     // 보스의 열거형 상수
     public enum BossState
@@ -42,8 +49,17 @@ public class BossFSM : MonoBehaviour
         // Player라는 태그를 찾는다.
         player = GameObject.FindWithTag("Player").transform;
 
+        capsulcollier = GetComponent<CapsuleCollider>();
+
         // 자식 오브젝트로부터 Animator 컴포넌트를 가져온다.
         bossAnim = GetComponentInChildren<Animator>();
+
+        // BossSkillSensor 스크립트를 가져온다.
+        bossSkill = GetComponentInChildren<BossSkillSensor>();
+
+        // 자식으로 있는 BossSkillCollider를 비활성화 시킨다.
+        bsc = transform.Find("BossSkillColliders").gameObject;
+        bsc.SetActive(false);
     }
 
     void Update()
@@ -80,6 +96,7 @@ public class BossFSM : MonoBehaviour
         {
             // 스크립트를 비활성화 시킨다.
             this.enabled = false;
+            capsulcollier.isTrigger = true;
         }
     }
 
@@ -169,7 +186,21 @@ public class BossFSM : MonoBehaviour
 
     private void Skill()
     {
-        
+        if(isSkillCollider == false)
+        {
+            isSkillCollider = true;
+            // 스킬 패턴을 시작하는 애니메이션을 실행하고
+            bossAnim.SetTrigger("OnSkill");
+
+            //StartCoroutine(AnimStopPlay()); @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+            //// 보스의 검 끝을 바닥을 향하도록 회전한다.
+            //bossSword.transform.Rotate(102, 0, 0);
+
+            // n초 후 파티클을 실행한다.
+            StartCoroutine(BossSkillEffect());
+        }
+        bState = BossState.Idle;
     }
 
     private void Damaged()
@@ -288,4 +319,43 @@ public class BossFSM : MonoBehaviour
         yield return new WaitForSeconds(3.8f);
         attackmotion = false;
     }
+
+    IEnumerator BossSkillEffect()
+    {
+        // 박스 콜라이더가 true상태가 되는 시간이 존재 할텐데
+        yield return new WaitForSeconds(2f);
+        // 스킬 애니메이션 동작을 하는 n초 후에 BossSkillSensor의 BoxCollider를 활성화 시킨다.
+        bsc.SetActive(true);
+
+        // 스킬 이펙트를 활성화하고
+        for(int i = 0; i < bossSkillEffect.Length; i++)
+        {
+            bossSkillEffect[i].SetActive(true);
+            ParticleSystem particle = bossSkillEffect[i].GetComponentInChildren<ParticleSystem>();
+            if(particle != null)
+            {
+                particle.Stop();
+                particle.Play();
+            }
+        }
+        // 파티클을 실행한다.
+        // bossSkillParticle.Stop();
+        // bossSkillParticle.Play();
+        // 스킬 애니메이션이 실행되고 스킬 파티클이 나오기 전까지의 딜레이 시간
+    }
+
+    //IEnumerator AnimStopPlay()  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    //{
+    //    // 스킬 애니메이션을 플레이 하고
+    //    bossAnim.SetTrigger("OnSkill");
+
+    //    // 1.04초를 기다린 후
+    //    yield return new WaitForSeconds(1f);
+
+    //    // 애니메이션을 정지시킨다.
+    //    bossAnim.StopPlayback();
+
+    //    yield return new WaitForSeconds(1f);
+    //    bossAnim.StartPlayback();
+    //}
 }
