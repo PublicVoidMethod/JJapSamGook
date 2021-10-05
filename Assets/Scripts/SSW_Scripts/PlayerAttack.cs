@@ -29,6 +29,11 @@ public class PlayerAttack : MonoBehaviour
     Animator anim;
     public int attackSpeed = 8;
 
+    // 카메라 강조 공격 변수
+    //public int gauge = 90;
+    //public GameObject attackRange;
+    public CameraType2_SSW camera;
+
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -38,24 +43,25 @@ public class PlayerAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // 평타 
-        if (Time.time - lastClickedTime > maxComboDelay)
-        {
-            noOfClicks = 0;
-            //pm.pState = PlayerMove.PlayerFSM.Normal;
-            //float h = Input.GetAxisRaw("Horizontal");
-            //float v = Input.GetAxisRaw("Vertical");
-            //Vector3 dir = new Vector3(h, 0, v);
-            //dir.Normalize();
-        }
+        StartCoroutine(Zattack());
 
 
     }
 
     public void attack1()
     {
-        
-        
+        // 평타 
+        // 콤보 딜레이 시간이 지나면 클릭횟수를 0으로 만든다
+        if (Time.time - lastClickedTime > maxComboDelay)
+        {
+            noOfClicks = 0;
+            //    //pm.pState = PlayerMove.PlayerFSM.Normal;
+            //    //float h = Input.GetAxisRaw("Horizontal");
+            //    //float v = Input.GetAxisRaw("Vertical");
+            //    //Vector3 dir = new Vector3(h, 0, v);
+            //    //dir.Normalize();
+        }
+
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {
 
@@ -74,6 +80,7 @@ public class PlayerAttack : MonoBehaviour
                 pm.isAttack = false;
                 pm.pState = PlayerMove.PlayerFSM.Normal;
                 print(pm.pState);
+                noOfClicks = 0;
             }
             noOfClicks = Mathf.Clamp(noOfClicks, 0, 4);
              
@@ -88,13 +95,13 @@ public class PlayerAttack : MonoBehaviour
             anim.SetTrigger("Attack02");
             //anim.SetBool("Attack01", false);
         }
-        //else if (noOfClicks < 2)
-        //{
-        //    //anim.SetBool("Attack01", false);
-        //    pm.isAttack = false;
-        //    pm.pState = PlayerMove.PlayerFSM.Normal;
-        //    noOfClicks = 0;
-        //}
+        else if (noOfClicks < 2)
+        {
+            //anim.SetBool("Attack01", false);
+            pm.isAttack = false;
+            pm.pState = PlayerMove.PlayerFSM.Normal;
+            noOfClicks = 0;
+        }
     }
 
     public void return2()
@@ -103,19 +110,20 @@ public class PlayerAttack : MonoBehaviour
         float v = Input.GetAxisRaw("Vertical");
         Vector3 dir = new Vector3(h, 0, v);
         dir.Normalize();
-        if (noOfClicks >= 3)
+        if (noOfClicks >= 3 && dir != Vector3.zero)
         {
+            attackSpeed = 15;
             anim.SetTrigger("Attack03");
             pm.rb.AddForce(dir * attackSpeed, ForceMode.Impulse);
             //anim.SetBool("Attack02", false);
         }
-        //else if (noOfClicks < 3)
-        //{
-        //    //anim.SetBool("Attack02", false);
-        //    pm.isAttack = false;
-        //    pm.pState = PlayerMove.PlayerFSM.Normal;
-        //    noOfClicks = 0;
-        //}
+        else if (noOfClicks < 3)
+        {
+            //anim.SetBool("Attack02", false);
+            pm.isAttack = false;
+            pm.pState = PlayerMove.PlayerFSM.Normal;
+            noOfClicks = 0;
+        }
     }
 
     public void return3()
@@ -124,27 +132,43 @@ public class PlayerAttack : MonoBehaviour
         float v = Input.GetAxisRaw("Vertical");
         Vector3 dir = new Vector3(h, 0, v);
         dir.Normalize();
-        if (noOfClicks >= 4)
+        if (noOfClicks >= 4 && dir != Vector3.zero)
         {
+            attackSpeed = 8;
             anim.SetTrigger("Attack04");
             pm.rb.AddForce(dir * attackSpeed, ForceMode.Impulse);
             //anim.SetBool("Attack03", false);
         }
-        //else
-        //{
-        //    //anim.SetBool("Attack03", false);
-        //    pm.isAttack = false;
-        //    pm.pState = PlayerMove.PlayerFSM.Normal;
-        //    noOfClicks = 0;
-        //}
+        else
+        {
+            //anim.SetBool("Attack03", false);
+            pm.isAttack = false;
+            pm.pState = PlayerMove.PlayerFSM.Normal;
+            noOfClicks = 0;
+        }
     }
 
     public void return4()
     {
-        if(noOfClicks == 0)
+        if(noOfClicks == 4)
            pm.isAttack = false;
            pm.pState = PlayerMove.PlayerFSM.Normal;
-           //noOfClicks = 0;
+           noOfClicks = 0;
 
+    }
+
+    public IEnumerator Zattack()
+    {
+        if (Input.GetKeyDown(KeyCode.Z))
+        {   
+            anim.SetTrigger("ZAttack");
+        }
+
+        while (anim.GetCurrentAnimatorStateInfo(3).IsName("maintenance"))
+        {
+            camera.ZAttackTime();
+            yield return new WaitForSeconds(2);
+            //camera.BackPosition();
+        }
     }
 }

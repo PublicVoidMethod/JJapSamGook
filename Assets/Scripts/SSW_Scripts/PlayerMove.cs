@@ -19,6 +19,8 @@ public class PlayerMove : MonoBehaviour
     //public float maxComboDelay = 0.9f;
     public float rotationSpeed = 8;
     public float jumpCount = 1;
+    bool isMove = false;
+
 
     //public float yVelocity = 0;
     public float dashSpeed;
@@ -85,7 +87,7 @@ public class PlayerMove : MonoBehaviour
     {
        // StopAllCoroutines();
         Move();
-        print(pState);
+        //print(pState);
         if (isAttack == true)
         {
             pState = PlayerFSM.Attack;
@@ -107,6 +109,10 @@ public class PlayerMove : MonoBehaviour
     {
         //moveSpeed = 3;
         pAttck.attack1();
+        if(isAttack == false)
+        {
+            pState = PlayerFSM.Normal;
+        }
 
     }
 
@@ -146,7 +152,9 @@ public class PlayerMove : MonoBehaviour
     //플레이어 이동
     public void Move()
     {
-       
+        isMove = true;
+      if (isMove)
+      {
 
         // 점프      
         if (Input.GetButtonDown("Jump") )
@@ -203,11 +211,15 @@ public class PlayerMove : MonoBehaviour
 
         transform.position += dir * dashSpeed * Time.deltaTime;
 
-        if (Input.GetKeyDown(KeyCode.LeftControl))
+        if (Input.GetKeyDown(KeyCode.LeftControl) || Input.GetKeyDown(KeyCode.Z))
         {
             isAttack = true;
+            isMove = false;
+            pAttck.noOfClicks++;
         }
+      }
     }
+
 
 
 }
