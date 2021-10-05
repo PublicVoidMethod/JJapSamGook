@@ -27,6 +27,4 @@ public class HitAction_SSW : MonoBehaviour
             player.DamageProcess(attackDamage);
         }
     }
-
-    //
 }

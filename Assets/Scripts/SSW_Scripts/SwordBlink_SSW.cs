@@ -46,13 +46,13 @@ public class SwordBlink_SSW : MonoBehaviour
     public void On()
     {
         bc.enabled = true;
-        print(bc.enabled);
+        //print(bc.enabled);
     }
 
     public void Off()
     {
         bc.enabled = false;
-        print(bc.enabled);
+        //print(bc.enabled);
     }
 
     

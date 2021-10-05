@@ -24,10 +24,10 @@ public class PlayerMove : MonoBehaviour
     public float dashSpeed;
 
     public Rigidbody rb;
-
+    public PlayerAttack pAttck;
+    public bool isAttack = false;
     Animator anim;
-
-
+    
    // public GameObject hitattack;
 
     public enum PlayerFSM
@@ -42,10 +42,13 @@ public class PlayerMove : MonoBehaviour
     public PlayerFSM pState;
     void Start()
     {
+        dashSpeed = moveSpeed;
         currentHp = maxHp;
-        rb = GetComponent<Rigidbody>();
-       
+        rb = GetComponent<Rigidbody>();       
         anim = GetComponentInChildren<Animator>();
+        pState = PlayerFSM.Normal;
+        print(livenumber);
+        pAttck = GetComponentInChildren<PlayerAttack>();
     }
 
 
@@ -71,16 +74,23 @@ public class PlayerMove : MonoBehaviour
         }
 
 
-        dashSpeed = moveSpeed;
-        //isJumping = false;
-        Move();
+        //dashSpeed = moveSpeed;
+        ////isJumping = false;
+        //Move();
        
         
 
     }
     private void Normal()
     {
-        throw new NotImplementedException();
+       // StopAllCoroutines();
+        Move();
+        print(pState);
+        if (isAttack == true)
+        {
+            pState = PlayerFSM.Attack;
+            print(pState);
+        }
     }
 
     private void Idle()
@@ -95,7 +105,9 @@ public class PlayerMove : MonoBehaviour
 
     private void Attack()
     {
-        throw new NotImplementedException();
+        //moveSpeed = 3;
+        pAttck.attack1();
+
     }
 
     private void Die()
@@ -134,7 +146,7 @@ public class PlayerMove : MonoBehaviour
     //플레이어 이동
     public void Move()
     {
-        
+       
 
         // 점프      
         if (Input.GetButtonDown("Jump") )
@@ -148,14 +160,14 @@ public class PlayerMove : MonoBehaviour
                 jumpCount--;
                 
                 anim.SetTrigger("jumpStart");
-                anim.ResetTrigger("JumpLanded");
+                //anim.ResetTrigger("JumpLanded");
 
             }
 
             
         }
 
-        float h = Input.GetAxisRaw("Horizontal");
+;       float h = Input.GetAxisRaw("Horizontal");
         float v = Input.GetAxisRaw("Vertical");
         Vector3 dir = new Vector3(h, 0, v);
         dir.Normalize();
@@ -173,20 +185,28 @@ public class PlayerMove : MonoBehaviour
 
         }
 
-        //구르기 && dir != Vector3.zero
+        //구르기 && dir != Vector3.zero && dir != Vector3.zero && curTime > 0.2f
         curTime += Time.deltaTime;
-        if (Input.GetKeyDown(KeyCode.LeftShift) && curTime > 0.3f && dir != Vector3.zero)
+        if (Input.GetKeyDown(KeyCode.LeftShift))
         {
+            print("roll");
             curTime = 0;
             anim.SetTrigger("Roll");
+            if(jumpCount  <= 0)
+            {
+                print("jump");
+                anim.SetTrigger("JumpRoll");
+            }
         }
-        
 
         //rb.MovePosition(transform.position + dir * dashSpeed * Time.deltaTime);
 
         transform.position += dir * dashSpeed * Time.deltaTime;
 
-
+        if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            isAttack = true;
+        }
     }
 
 

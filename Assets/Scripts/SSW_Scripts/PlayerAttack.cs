@@ -2,15 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class PlayerAttack : MonoBehaviour
 {
+    //public static PlayerAttack pAttack;
+
+    //private void Awake()
+    //{
+    //    if (pAttack = null)
+    //    {
+    //        pAttack = this;
+    //    }
+    //    else
+    //    {
+    //        Destroy(gameObject);
+    //    }
+    //}
+
+    
+
     //연속공격 관련 변수
     public int noOfClicks = 0;
     float lastClickedTime = 0;
     public float maxComboDelay = 0.9f;
     public PlayerMove pm;
-
     Animator anim;
+    public int attackSpeed = 8;
+
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -24,84 +42,109 @@ public class PlayerAttack : MonoBehaviour
         if (Time.time - lastClickedTime > maxComboDelay)
         {
             noOfClicks = 0;
+            //pm.pState = PlayerMove.PlayerFSM.Normal;
+            //float h = Input.GetAxisRaw("Horizontal");
+            //float v = Input.GetAxisRaw("Vertical");
+            //Vector3 dir = new Vector3(h, 0, v);
+            //dir.Normalize();
         }
 
-        AnimatorStateInfo animState = anim.GetCurrentAnimatorStateInfo(0);
-        if (Input.GetMouseButtonDown(0))
-        {
-            lastClickedTime = Time.time;
-            noOfClicks++;
-            if (noOfClicks == 1)
-            {
-                anim.SetBool("Attack01", true);
-                StartCoroutine(attack1());
-                print(pm.dashSpeed);
-            }
-            noOfClicks = Mathf.Clamp(noOfClicks, 0, 4);
 
-            //@@@@@@
-            if(noOfClicks >= 2)
-            {
-                StopAllCoroutines();
-            }
-        }
     }
 
-    IEnumerator attack1()
+    public void attack1()
     {
-        yield return null;
-        pm.dashSpeed = pm.moveSpeed * 1 / 5;
+        
+        
+        if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
+
+
+            lastClickedTime = Time.time;
+            noOfClicks++;
+            if (noOfClicks >= 1 )// && dir != Vector3.zero)
+            {
+                anim.SetTrigger("Attack01");
+               // pm.rb.AddForce(dir * attackSpeed , ForceMode.Impulse);
+                //pm.rb.MovePosition(pm.transform.position + dir * attackSpeed * Time.deltaTime);              
+            }
+            else
+            {
+               // anim.SetBool("Attack01", false);
+                pm.isAttack = false;
+                pm.pState = PlayerMove.PlayerFSM.Normal;
+                print(pm.pState);
+            }
+            noOfClicks = Mathf.Clamp(noOfClicks, 0, 4);
+             
+
+        }
     }
 
     public void return1()
     {
         if (noOfClicks >= 2)
         {
-            anim.SetBool("Attack02", true);
+            anim.SetTrigger("Attack02");
             //anim.SetBool("Attack01", false);
         }
-        else if(noOfClicks < 2)
-        {
-            anim.SetBool("Attack01", false);
-            noOfClicks = 0;
-        }
+        //else if (noOfClicks < 2)
+        //{
+        //    //anim.SetBool("Attack01", false);
+        //    pm.isAttack = false;
+        //    pm.pState = PlayerMove.PlayerFSM.Normal;
+        //    noOfClicks = 0;
+        //}
     }
 
     public void return2()
     {
+        float h = Input.GetAxisRaw("Horizontal");
+        float v = Input.GetAxisRaw("Vertical");
+        Vector3 dir = new Vector3(h, 0, v);
+        dir.Normalize();
         if (noOfClicks >= 3)
         {
-            anim.SetBool("Attack03", true);
+            anim.SetTrigger("Attack03");
+            pm.rb.AddForce(dir * attackSpeed, ForceMode.Impulse);
             //anim.SetBool("Attack02", false);
         }
-        else if(noOfClicks < 3)
-        {
-            anim.SetBool("Attack02", false);
-            noOfClicks = 0;
-        }
+        //else if (noOfClicks < 3)
+        //{
+        //    //anim.SetBool("Attack02", false);
+        //    pm.isAttack = false;
+        //    pm.pState = PlayerMove.PlayerFSM.Normal;
+        //    noOfClicks = 0;
+        //}
     }
 
     public void return3()
     {
+        float h = Input.GetAxisRaw("Horizontal");
+        float v = Input.GetAxisRaw("Vertical");
+        Vector3 dir = new Vector3(h, 0, v);
+        dir.Normalize();
         if (noOfClicks >= 4)
         {
-            anim.SetBool("Attack04", true);
+            anim.SetTrigger("Attack04");
+            pm.rb.AddForce(dir * attackSpeed, ForceMode.Impulse);
             //anim.SetBool("Attack03", false);
         }
-        else
-        {
-            anim.SetBool("Attack03", false);
-            noOfClicks = 0;
-        }
+        //else
+        //{
+        //    //anim.SetBool("Attack03", false);
+        //    pm.isAttack = false;
+        //    pm.pState = PlayerMove.PlayerFSM.Normal;
+        //    noOfClicks = 0;
+        //}
     }
 
     public void return4()
     {
-        anim.SetBool("Attack01", false);
-        anim.SetBool("Attack02", false);
-        anim.SetBool("Attack03", false);
-        anim.SetBool("Attack04", false);
-        noOfClicks = 0;
+        if(noOfClicks == 0)
+           pm.isAttack = false;
+           pm.pState = PlayerMove.PlayerFSM.Normal;
+           //noOfClicks = 0;
 
     }
 }

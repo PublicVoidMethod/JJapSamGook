@@ -7,7 +7,7 @@ public class Groundetection : MonoBehaviour
     //float jumpCount = 1;
     public Animator anim;
     public PlayerMove pm;
-    float curTime = 0;
+    //float curTime = 0;
 
     void Start()
     {

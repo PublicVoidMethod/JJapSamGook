@@ -123,6 +123,25 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &236725630 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2569665088934313337, guid: 67affd45ae1bb024ebf5bde99969cf20, type: 3}
+  m_PrefabInstance: {fileID: 5901058095446914688}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &236725634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 236725630}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89bee8bab1322f4459aff9576627a0f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pm: {fileID: 0}
+  currentState: Normal
 --- !u!1 &276830005
 GameObject:
   m_ObjectHideFlags: 0
@@ -615,6 +634,10 @@ PrefabInstance:
       propertyPath: pm
       value: 
       objectReference: {fileID: 411590417}
+    - target: {fileID: 1834184553986353394, guid: 67affd45ae1bb024ebf5bde99969cf20, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2946084662509217731, guid: 67affd45ae1bb024ebf5bde99969cf20, type: 3}
       propertyPath: m_LocalPosition.y
       value: -0.98
@@ -754,7 +777,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7385803925499134636, guid: 06efebdafb5d13842834426291139ef2, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 06efebdafb5d13842834426291139ef2, type: 3}
