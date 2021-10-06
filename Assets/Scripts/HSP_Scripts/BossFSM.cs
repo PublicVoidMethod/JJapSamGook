@@ -10,9 +10,13 @@ public class BossFSM : MonoBehaviour
     public float sightDegree = 30.0f;  // 보스의 시야 각도의 크기
     public float attackRange = 2.0f;  // 보스의 평타 공격 범위
 
+    public GameObject bossHPBar;  // 보스 HP바를 SetActive 할 수 있게 만든 변수
+
     Transform player;  // "Player" 태그를 찾기위한 변수
     Rigidbody bossRB;  // 보스의 리지드 바디 변수
-    
+    Animator bossAnim;  // 보스의 애니메이터 변수
+
+    bool isbooked = false;
 
     // 보스의 열거형 상수
     public enum BossState
@@ -35,6 +39,9 @@ public class BossFSM : MonoBehaviour
 
         // Player라는 태그를 찾는다.
         player = GameObject.FindWithTag("Player").transform;
+
+        // 자식 오브젝트로부터 Animator 컴포넌트를 가져온다.
+        bossAnim = GetComponentInChildren<Animator>();
     }
 
     void Update()
@@ -61,7 +68,9 @@ public class BossFSM : MonoBehaviour
         }
 
         // 보스의 정면 벡터를 플레이어를 향하도록 회전한다.
-        Vector3 dir = (player.position - transform.position).normalized;
+        Vector3 dir = player.position - transform.position;
+        dir.y = 0;
+        dir.Normalize();
         transform.rotation = Quaternion.LookRotation(dir);
     }
 
@@ -79,18 +88,19 @@ public class BossFSM : MonoBehaviour
             // 내적의 결과가 양수라면(즉, 플레이어가 앞에 있다면)
             if(cosValue > 0)
             {
-                // 나의 정면 벡터와 플레이어를 바라보는 벡터와의 시앗각을 구한다.  ??????????????????????
+                // 나의 정면 벡터와 플레이어를 바라보는 벡터와의 사잇각을 구한다.  ??????????????????????
                 float degree = Mathf.Acos(cosValue) * Mathf.Rad2Deg;
 
                 // 만약 보스의 시야각 안으로 들어왔다면
                 if(degree < sightDegree)
                 {
+                    bossHPBar.SetActive(true);
+
                     //// 보스의 정면 벡터를 플레이어를 향하도록 회전한다.
                     //Vector3 dir = (player.position - transform.position).normalized;
                     //transform.rotation = Quaternion.LookRotation(dir);
 
-                    // 보스의 상태를 Move 상태로 전환한다.
-                    bState = BossState.Move;
+                    SetMoveState();
                 }
             }
         }
@@ -100,6 +110,7 @@ public class BossFSM : MonoBehaviour
     {
         // 나는(보스) 플레이어의 방향을 가지고
         Vector3 dir = player.position - transform.position;
+        dir.y = 0;
         dir.Normalize();
 
         // 움직이고 싶다.
@@ -110,15 +121,31 @@ public class BossFSM : MonoBehaviour
         if (attackRange > (player.position - transform.position).magnitude)
         {
             // 이동을 멈추고
-            bossRB.velocity = transform.position;
+            bossRB.velocity = Vector3.zero;
+            
             // 어택 상태로 전환한다.
             bState = BossState.Attack;
+
+            // 공격 애니메이션을 실행한다.
+            bossAnim.SetTrigger("MoveToAttack");
         }
     }
 
     private void Attack()
     {
+        // 만약 나(보스)와 플레이어와의 거리가 평타 공격 범위보다 멀어지면(평타 공격 범위 < 나와 플레이어의 거리)
+        if(attackRange < (player.position - transform.position).magnitude)
+        {
+            if (!isbooked)
+            {
+                // Move상태로 1.5초 후에 전환한다.
+                Invoke("SetMoveState", 1.5f);
+                //return;
+                isbooked = true;
 
+                //bossAnim.SetTrigger("IdleToMove");
+            }
+        }
     }
 
     private void Damaged()
@@ -129,6 +156,17 @@ public class BossFSM : MonoBehaviour
     private void Die()
     {
 
+    }
+
+    void SetMoveState()
+    {
+        // 보스의 상태를 Move 상태로 전환한다.
+        bState = BossState.Move;
+
+        // 이동 애니메이션을 실행한다.
+        bossAnim.SetTrigger("IdleToMove");
+
+        isbooked = false;
     }
 
     /// <summary>
