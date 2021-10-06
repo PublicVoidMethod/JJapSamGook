@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Ground
   - Sword
+  - Boss
+  - Enemy
+  - Interact
   layers:
   - Default
   - TransparentFX
@@ -13,8 +16,8 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
+  - Boss
+  - Boss_Collider
   - 
   - 
   - 

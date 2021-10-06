@@ -7,19 +7,21 @@ public class Groundetection : MonoBehaviour
     //float jumpCount = 1;
     public Animator anim;
     public PlayerMove pm;
+    float curTime = 0;
 
     void Start()
     {
         anim = GetComponentInParent<Animator>();
         pm = GetComponentInParent<PlayerMove>();
-        //print("¹Ù´Ú ÃøÁ¤!!!!!");
+        //print("ï¿½Ù´ï¿½ ï¿½ï¿½ï¿½ï¿½!!!!!");
 
     }
+
 
     // Update is called once per frame
     void Update()
     {
-       // print("¹Ù´Ú ÃøÁ¤!!!!!");
+       // print("ï¿½Ù´ï¿½ ï¿½ï¿½ï¿½ï¿½!!!!!");
         //if (anim.GetBool("jumpStart") == true )
         //{
         //    Ray ray = new Ray(transform.position, new Vector3(0, -1, 0));
@@ -27,10 +29,10 @@ public class Groundetection : MonoBehaviour
 
         //    if (Physics.Raycast(ray, out hitInfo))
         //    {
-        //        print("¹Ù´Ú ÃøÁ¤!!!!!");
+        //        print("ï¿½Ù´ï¿½ ï¿½ï¿½ï¿½ï¿½!!!!!");
         //        if (hitInfo.distance - 1 < 1.5f)
         //        {
-        //            print("¹Ù´Ú ÃøÁ¤!");
+        //            print("ï¿½Ù´ï¿½ ï¿½ï¿½ï¿½ï¿½!");
         //            anim.SetBool("jumpStart", false);
         //            pm.jumpCount = 1;
         //            // pm.jumpCount = 0;
@@ -57,4 +59,26 @@ public class Groundetection : MonoBehaviour
 
         }
     }
+<<<<<<< HEAD
+=======
+
+    
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Ground"))
+        {
+
+            print("ï¿½Ù´ï¿½!!!!!");
+
+            anim.SetTrigger("JumpLanded");
+            pm.jumpCount = 1;
+
+            //print(jumpCount);
+
+        }
+    }
+
+
+>>>>>>> HSP
 }
