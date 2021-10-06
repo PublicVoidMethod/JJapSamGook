@@ -27,13 +27,13 @@ public class PlayerMove : MonoBehaviour
     Animator anim;
 
 
-   // public GameObject hitattack;
+    // public GameObject hitattack;
 
     void Start()
     {
         currentHp = maxHp;
         rb = GetComponent<Rigidbody>();
-       
+
         anim = GetComponentInChildren<Animator>();
     }
 
@@ -43,13 +43,13 @@ public class PlayerMove : MonoBehaviour
         dashSpeed = moveSpeed;
         //isJumping = false;
         Move();
-       
-        if(currentHp == 0)
+
+        if (currentHp == 0)
         {
             livenumber--;
             DiePlayer();
         }
-       
+
     }
 
     // �ǰ� ������ + �ִϸ��̼�
@@ -65,38 +65,38 @@ public class PlayerMove : MonoBehaviour
     // ���� �ִϸ��̼�
     public void DiePlayer()
     {
-        if(livenumber == 0)
+        if (livenumber == 0)
         {
             // �ݶ��̴��� ��Ȱ��ȭ�Ѵ�.
             GetComponent<CapsuleCollider>().enabled = false;
             rb.useGravity = false;
             anim.SetTrigger("Die");
-            
+            this.enabled = false;
 
         }
     }
-    //�÷��̾� �̵�
+
     public void Move()
     {
-        
 
-        // ����      
-        if (Input.GetButtonDown("Jump") )
+
+        // 점프      
+        if (Input.GetButtonDown("Jump"))
         {
             print(jumpCount + "after");
             if (jumpCount > 0)
             {
                 //yVelocity = jumpPower;
                 //transform.position +=  * jumpPower * Time.deltaTime;
-                rb.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);             
+                rb.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
                 jumpCount--;
 
-
-                anim.SetTrigger("jumpStart");  
+                anim.SetTrigger("jumpStart");
+                anim.ResetTrigger("JumpLanded");
 
             }
 
-            
+
         }
 
         float h = Input.GetAxisRaw("Horizontal");
@@ -107,24 +107,24 @@ public class PlayerMove : MonoBehaviour
         anim.SetFloat("Horizontal", h);
         anim.SetFloat("Vertical", v);
 
-        // �̵��Ϸ��� �������� ĳ���͸� ȸ����Ų��.
+        // 이동하려는 방향으로 캐릭터를 회전시킨다.
         if (dir != Vector3.zero)
         {
             Vector3 rot = dir;
             rot.y = 0;
             Quaternion newRotation = Quaternion.LookRotation(rot);
-            transform.rotation = Quaternion.Slerp(transform.rotation, newRotation, rotationSpeed * Time.deltaTime);                                                                                                              
+            transform.rotation = Quaternion.Slerp(transform.rotation, newRotation, rotationSpeed * Time.deltaTime);
 
         }
 
-        //������
+        //구르기 && dir != Vector3.zero
         curTime += Time.deltaTime;
-        if (Input.GetKeyDown(KeyCode.LeftShift) && curTime > 0.3f && dir != Vector3.zero )
+        if (Input.GetKeyDown(KeyCode.LeftShift) && curTime > 0.3f && dir != Vector3.zero)
         {
             curTime = 0;
             anim.SetTrigger("Roll");
         }
-        
+
 
         //rb.MovePosition(transform.position + dir * dashSpeed * Time.deltaTime);
 
@@ -132,15 +132,4 @@ public class PlayerMove : MonoBehaviour
 
 
     }
-
-  
-
-
-
-
-
-
-
-
-
 }
