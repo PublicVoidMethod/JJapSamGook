@@ -90,17 +90,9 @@ public class PlayerMove : MonoBehaviour
                 //transform.position +=  * jumpPower * Time.deltaTime;
                 rb.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);             
                 jumpCount--;
-                
 
-                if (anim.GetBool("jumpStart") == false)
-                {
 
-                    anim.SetBool("jumpStart", true);
-                }
-                else
-                {
-                    return;
-                }                
+                anim.SetTrigger("jumpStart");  
 
             }
 
@@ -146,18 +138,7 @@ public class PlayerMove : MonoBehaviour
 
 
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Ground"))
-        {
-            
-           print("�ٴ� ����!");
-           jumpCount = 1;
 
-            print(jumpCount);
-                    
-        }
-    }
 
 
 

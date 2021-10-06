@@ -14,6 +14,8 @@ public class SwordAction : MonoBehaviour
     public float ShakeTime = 0.01f;
     public float delayTime = 0.01f;
     float currentTime = 0;
+    public EnemyMove enemy;
+    public bool isThrow = false;
     void Start()
     {
         triggerBox = GetComponent<BoxCollider>();
@@ -38,6 +40,15 @@ public class SwordAction : MonoBehaviour
             // �÷��̾�� �ڽ��� ���ݷ¸�ŭ�� �������� �ش�.
             enemy.OnHit(attackPower);
             cameraShaking();
+            if (anim.GetBool("SpecialSkill") == true)
+            {
+                enemy.eState = EnemyMove.EnemyState.ComboDamaged;
+
+            }
+            if (isThrow)
+            {
+                enemy.eState = EnemyMove.EnemyState.Throw;
+            }
         }
 
       

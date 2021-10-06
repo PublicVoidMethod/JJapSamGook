@@ -6,7 +6,7 @@ using UnityEngine.AI;
 
 public class EnemyMove : MonoBehaviour
 {
- public enum EnemyState
+    public enum EnemyState
     {
         Idle,
         Move,
@@ -25,10 +25,14 @@ public class EnemyMove : MonoBehaviour
     float currentTime = 0;
     public float delayTime = 1;
     bool isNum = false;
-    [HideInInspector] public int maxHP = 10;
+    [HideInInspector] public int maxHP = 1000;
     [SerializeField] int curHP = 0;
     int liveNum = 1;
-
+    Rigidbody rb;
+    public float hitUp = 5.0f;
+    public int specialNum;
+    public int throwNum;
+    GameObject sword;
     void Start()
     {
         currentTime = delayTime;
@@ -36,11 +40,13 @@ public class EnemyMove : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player"); // �ɽ¿찡 ��        
         anim = GetComponentInChildren<Animator>();
         curHP = maxHP;
-
-        
+        rb = GetComponent<Rigidbody>();
+        specialNum = 1;
+        throwNum = 1;
+        sword = transform.GetComponentInChildren<SwordItem>().gameObject;
     }
 
-    protected void Update()
+    public void Update()
     {
         switch (eState)
         {
@@ -65,43 +71,79 @@ public class EnemyMove : MonoBehaviour
             default:
                 break;
         }
-        
-        if(curHP == 0)
+
+        if (curHP == 0)
         {
             liveNum--;
-            eState =  EnemyState.Die;
+            eState = EnemyState.Die;
         }
         currentTime += Time.deltaTime;
 
 
     }
 
-    private void Throw()
+    public void Throw()
     {
-        throw new NotImplementedException();
+        //캐릭터 뒷방향으로 설정한다.
+
+        rb.constraints = RigidbodyConstraints.None;
+        rb.constraints = RigidbodyConstraints.FreezeRotation;
+
+        rb.AddForce(-transform.forward * 50);
+        rb.useGravity = true;
+        //rb.constraints = RigidbodyConstraints.FreezeAll;
+        if (throwNum == 1)
+        {
+            anim.SetTrigger("SpecialThrow");
+            throwNum = 0;
+        }
+        Invoke("skillUp", 2.0f);
     }
 
-    private void ComboDamaged()
+    public void ComboDamaged()
     {
-        throw new NotImplementedException();
+
+        //콤보 데미지, 필살기 데미지를 입으면, 다 맞을 때까지 공중에 떠있는다.
+        curHP = 100000;
+        rb.useGravity = false;
+        Vector3 ePos = transform.position;
+
+        rb.constraints = RigidbodyConstraints.FreezeAll;
+
+        sword.transform.parent = null;
+        sword.GetComponent<BoxCollider>().isTrigger = false;
+        sword.AddComponent<Rigidbody>();
+        if (specialNum == 1)
+        {
+            anim.SetTrigger("SpecialHit");
+
+            specialNum = 0;
+        }
+
+    }
+
+    private void skillUp()
+    {
+        specialNum = 1;
+        throwNum = 1;
     }
 
     private void Idle()
     {
-        
+
         float distance = (player.transform.position - transform.position).magnitude;
 
         if (attackDistance >= distance)
         {
-           
+
             SetMoveState();
-          
+
         }
     }
 
     private void SetMoveState()
     {
-        
+
         eState = EnemyState.Move;
         isNum = false;
         currentTime = 0;
@@ -111,15 +153,15 @@ public class EnemyMove : MonoBehaviour
 
     private void Move()
     {
-        
+
         Vector3 dir = player.transform.position - transform.position;
         dir.y = 0;
         float distance = dir.magnitude;
         if (distance <= attackRange)
         {
-            
+
             eState = EnemyState.Attack;
-           
+
             //CancelInvoke();
 
             //enemyAnim.SetTrigger("MoveToAttack");
@@ -129,7 +171,7 @@ public class EnemyMove : MonoBehaviour
             return;
         }
 
-        
+
         dir.Normalize();
         anim.SetTrigger("Run");
         transform.position += dir * moveSpeed * Time.deltaTime;
@@ -138,18 +180,18 @@ public class EnemyMove : MonoBehaviour
 
     public virtual void Attack()
     {
-         
+
         //print(currentTime);
         int AttackNum = 4;
         if (currentTime >= delayTime)
 
-        { 
-            if (isNum == false)
         {
-            AttackNum = UnityEngine.Random.Range(0, 4);
-            //print(AttackNum);
-            isNum = true;
-        }
+            if (isNum == false)
+            {
+                AttackNum = UnityEngine.Random.Range(0, 4);
+                //print(AttackNum);
+                isNum = true;
+            }
         }
         Vector3 dir = player.transform.position - transform.position;
         float distance = dir.magnitude;
@@ -157,40 +199,40 @@ public class EnemyMove : MonoBehaviour
         //�����Ÿ� �ȿ� �־�� �ϰ�)
         if (distance < attackRange)
         {
-            
+
             //print("�������� ������ �����ϰڴ�!");
             if (AttackNum == 0)
             {
-           // print("0�� ���� �Խ�!");
+                // print("0�� ���� �Խ�!");
                 anim.SetTrigger("Attack0");
-                
+
                 SetMoveState();
             }
-            if(AttackNum == 1)
+            if (AttackNum == 1)
             {
-           // print("1�� ���� �Խ�!");
+                // print("1�� ���� �Խ�!");
                 anim.SetTrigger("Attack1");
-                
+
                 SetMoveState();
             }
             if (AttackNum == 2)
             {
-           //print("2�� ���� �Խ�!");
+                //print("2�� ���� �Խ�!");
                 anim.SetTrigger("Attack2");
-                
+
                 SetMoveState();
             }
             if (AttackNum == 3)
             {
-            //print("3�� ���� �Խ�!");
+                //print("3�� ���� �Խ�!");
 
                 anim.SetTrigger("Attack3");
-             
+
                 SetMoveState();
             }
 
-         
-          
+
+
         }
         //���� ���� ���̸�
         else
@@ -198,30 +240,36 @@ public class EnemyMove : MonoBehaviour
             SetMoveState();
 
         }
-        
+
     }
+
+    public void DirStop()
+    {
+
+    }
+
 
     public void OnHit(int damage)
     {
         curHP = Mathf.Max(curHP - damage, 0);
-        print(curHP);
+        print("현재 체력" + curHP);
     }
 
     public void Die()
     {
-      if(liveNum ==0)
-        { 
-        anim.SetTrigger("Die");
+        if (liveNum == 0)
+        {
+            anim.SetTrigger("Die");
 
             // �ݶ��̴��� ��Ȱ��ȭ�Ѵ�.
             //GetComponent<CapsuleCollider>().enabled = false;
 
-            GameObject sword = transform.GetComponentInChildren<SwordItem>().gameObject;
+            //sword = transform.GetComponentInChildren<SwordItem>().gameObject;
             sword.transform.parent = null;
             sword.GetComponent<BoxCollider>().isTrigger = false;
             sword.AddComponent<Rigidbody>();
 
-        Invoke("EnemyDestroy", 3.0f);
+            Invoke("EnemyDestroy", 3.0f);
         }
     }
 
@@ -242,3 +290,4 @@ public class EnemyMove : MonoBehaviour
     //    }
     //}
 }
+

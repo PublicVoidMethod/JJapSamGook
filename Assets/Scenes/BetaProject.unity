@@ -1249,7 +1249,7 @@ GameObject:
   - component: {fileID: 215679767}
   m_Layer: 0
   m_Name: Terrain
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -8125,12 +8125,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3092836066982660380, guid: 15f5f1b3af2d72944a5b5a6051e30fbe, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.676
+      value: 1.03
       objectReference: {fileID: 0}
     - target: {fileID: 3092836066982660380, guid: 15f5f1b3af2d72944a5b5a6051e30fbe, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0.05
       objectReference: {fileID: 0}
+    - target: {fileID: 3496567536372282557, guid: 15f5f1b3af2d72944a5b5a6051e30fbe, type: 3}
+      propertyPath: landskill
+      value: 
+      objectReference: {fileID: 1614648838348040, guid: 6b12f08cfea33d1429a5fb9ca7e5f9fe, type: 3}
+    - target: {fileID: 7493973001567828325, guid: 15f5f1b3af2d72944a5b5a6051e30fbe, type: 3}
+      propertyPath: effect
+      value: 
+      objectReference: {fileID: 1614648838348040, guid: 6b12f08cfea33d1429a5fb9ca7e5f9fe, type: 3}
     - target: {fileID: 7713149731384807061, guid: 15f5f1b3af2d72944a5b5a6051e30fbe, type: 3}
       propertyPath: cam
       value: 

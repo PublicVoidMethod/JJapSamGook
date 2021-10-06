@@ -6,9 +6,9 @@ public class SwordBlink_SSW : MonoBehaviour
 {
     //public static SwordBlink_SSW blink;
 
-   
 
-
+    Transform player;
+    public GameObject landskill;
     public GameObject sword;
     BoxCollider bc;
 
@@ -29,6 +29,7 @@ public class SwordBlink_SSW : MonoBehaviour
     {
         bc = sword.GetComponent<BoxCollider>();
         bc.enabled = false;
+        player = GameObject.Find("Player_SSW1").transform;
     }
 
     // Update is called once per frame
@@ -46,14 +47,19 @@ public class SwordBlink_SSW : MonoBehaviour
     public void On()
     {
         bc.enabled = true;
-        print(bc.enabled);
+        //print(bc.enabled);
     }
 
     public void Off()
     {
         bc.enabled = false;
-        print(bc.enabled);
+        //print(bc.enabled);
     }
 
-    
+    private void SkillEffect()
+    {
+        GameObject go = Instantiate(landskill);
+        go.transform.position = player.transform.position;
+    }
+
 }

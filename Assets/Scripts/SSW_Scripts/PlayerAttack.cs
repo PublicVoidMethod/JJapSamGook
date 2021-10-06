@@ -9,12 +9,14 @@ public class PlayerAttack : MonoBehaviour
     float lastClickedTime = 0;
     public float maxComboDelay = 0.9f;
     PlayerMove playermove;
-
+    SwordAction swordAction;
     Animator anim;
+
     void Start()
     {
         anim = GetComponent<Animator>();
         playermove = GetComponentInParent<PlayerMove>();
+        swordAction = GetComponentInChildren<SwordAction>();
     }
 
     // Update is called once per frame
@@ -40,10 +42,8 @@ public class PlayerAttack : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.R))
             {
-           
-            playermove.enabled = false;
+            anim.SetBool("SpecialSkill", true);
             anim.SetTrigger("Special");
-            Invoke("playerMoveOff", 1.0f);
         }
         
     }
