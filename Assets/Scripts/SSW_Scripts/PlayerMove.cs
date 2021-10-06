@@ -113,6 +113,7 @@ public class PlayerMove : MonoBehaviour
         {
             pState = PlayerFSM.Normal;
         }
+        print(pState);
 
     }
 
@@ -215,7 +216,7 @@ public class PlayerMove : MonoBehaviour
         {
             isAttack = true;
             isMove = false;
-            pAttck.noOfClicks++;
+           // pAttck.noOfClicks++;
         }
       }
     }
