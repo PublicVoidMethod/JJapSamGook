@@ -59,26 +59,26 @@ public class Groundetection : MonoBehaviour
 
         }
     }
-<<<<<<< HEAD
-=======
+//<<<<<<< HEAD
+//=======
 
     
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Ground"))
-        {
+//    private void OnTriggerEnter(Collider other)
+//    {
+//        if (other.gameObject.CompareTag("Ground"))
+//        {
 
-            print("�ٴ�!!!!!");
+//            print("�ٴ�!!!!!");
 
-            anim.SetTrigger("JumpLanded");
-            pm.jumpCount = 1;
+//            anim.SetTrigger("JumpLanded");
+//            pm.jumpCount = 1;
 
-            //print(jumpCount);
+//            //print(jumpCount);
 
-        }
-    }
+//        }
+//    }
 
 
->>>>>>> HSP
+//>>>>>>> HSP
 }

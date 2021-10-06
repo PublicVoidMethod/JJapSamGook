@@ -516,6 +516,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sword: {fileID: 77257776}
+  landskill: {fileID: 0}
 --- !u!1 &388377233 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -5597756768894414403, guid: ce9f876e58055064dacc038bb440a147, type: 3}
@@ -1553,10 +1554,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bossMaxHP: 100
-  bossCurrentHP: 0
-  bossAttackPower: 10
   bossHPSlider: {fileID: 1351661027}
-  bloodEffect: {fileID: 504800681}
+  bossCurrentHP: 0
 --- !u!1001 &1658447575
 PrefabInstance:
   m_ObjectHideFlags: 0

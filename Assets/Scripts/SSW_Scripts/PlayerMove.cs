@@ -138,27 +138,27 @@ public class PlayerMove : MonoBehaviour
 
 
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Ground"))
-        {
+//    private void OnTriggerEnter(Collider other)
+//    {
+//        if (other.gameObject.CompareTag("Ground"))
+//        {
             
-<<<<<<<<< Temporary merge branch 1
-           print("바닥 측정!");
-=========
-           print("占쌕댐옙 占쏙옙占쏙옙!");
->>>>>>>>> Temporary merge branch 2
-           jumpCount = 1;
+//<<<<<<<<< Temporary merge branch 1
+//           print("바닥 측정!");
+//=========
+//           print("占쌕댐옙 占쏙옙占쏙옙!");
+//>>>>>>>>> Temporary merge branch 2
+//           jumpCount = 1;
 
-            print(jumpCount);
+//            print(jumpCount);
                     
-        }
-    }
+//        }
+//    }
 
-<<<<<<<<< Temporary merge branch 1
+//<<<<<<<<< Temporary merge branch 1
 
-=========
->>>>>>>>> Temporary merge branch 2
+//=========
+//>>>>>>>>> Temporary merge branch 2
 
 
 
