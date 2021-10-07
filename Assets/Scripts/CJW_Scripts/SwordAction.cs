@@ -5,33 +5,100 @@ using UnityEngine;
 public class SwordAction : MonoBehaviour
 {
     public int attackPower = 10;
-
+    public Animator anim;
     BoxCollider triggerBox;
+    public Camera cam;
+   public float camx = 0.1f;
+   public float camy = 0.1f;
+    Vector3 dir;
+    public float ShakeTime = 0.01f;
+    public float delayTime = 0.01f;
+    float currentTime = 0;
+    public EnemyMove enemy;
+    public bool isThrow = false;
 
     void Start()
     {
         triggerBox = GetComponent<BoxCollider>();
-    
+        anim = GetComponentInParent<Animator>();
+
     }
 
     void Update()
     {
-     
+        dir = cam.transform.position;
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void OnTriggerEnter(Collider other)
     {
-        EnemyMove enemy = other.GetComponent<EnemyMove>();
-
+        enemy = other.GetComponent<EnemyMove>();
+            
         if (enemy != null)
         {
-            // Æ®¸®°Å ¹Ú½º¸¦ ºñÈ°¼ºÈ­ÇÑ´Ù.
+            // Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½Ú½ï¿½ï¿½ï¿½ ï¿½ï¿½È°ï¿½ï¿½È­ï¿½Ñ´ï¿½.
             //triggerBox.enabled = false;
 
-            // ÇÃ·¹ÀÌ¾î¿¡°Ô ÀÚ½ÅÀÇ °ø°Ý·Â¸¸Å­ÀÇ µ¥¹ÌÁö¸¦ ÁØ´Ù.
+            // ï¿½Ã·ï¿½ï¿½Ì¾î¿¡ï¿½ï¿½ ï¿½Ú½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ý·Â¸ï¿½Å­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ø´ï¿½.
             enemy.OnHit(attackPower);
+            cameraShaking();
+            if (anim.GetBool("SpecialSkill") == true)
+            { 
+            enemy.eState = EnemyMove.EnemyState.ComboDamaged; 
+       
+            }
+            if (isThrow)
+            {
+                enemy.eState = EnemyMove.EnemyState.Throw;
+            }
+        }
+
+        
+      
+        if (other.gameObject.tag == "Sword")
+        {
+            //print("Ä®ï¿½ï¿½ï¿½ï¿½ ï¿½Â¾Ò´ï¿½");
+            // Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½Ú½ï¿½ï¿½ï¿½ ï¿½ï¿½È°ï¿½ï¿½È­ï¿½Ñ´ï¿½.
+            //triggerBox.enabled = false;
+
+            // ï¿½Ã·ï¿½ï¿½Ì¾î¿¡ï¿½ï¿½ ï¿½Ú½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ý·Â¸ï¿½Å­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ø´ï¿½.
+            anim.SetTrigger("Parry");
+        }
+
+        if (other.gameObject.CompareTag("Boss"))
+        {
+            BossStatus.instance.OnDamage(attackPower);
         }
     }
-    // Æ®¸®°Å¸¦ ºñÈ°¼ºÈ­ÇÑ´Ù
+
+    void cameraShaking()
+    {
+        Invoke("cameraUpX", ShakeTime);
+        Invoke("cameraUpY", ShakeTime+delayTime);
+        Invoke("cameraDownX", ShakeTime + 2* delayTime);
+        Invoke("cameraDownY", ShakeTime + 3 * delayTime);
+        Invoke("cameraUpX", ShakeTime + 4 * delayTime);
+        Invoke("cameraUpY", ShakeTime + 5 * delayTime);
+        Invoke("cameraDownX", ShakeTime + 6 * delayTime);
+        Invoke("cameraDownY", ShakeTime + 7 * delayTime);
+    }
    
+    void cameraUpX()
+    {
+        cam.transform.position = new Vector3(dir.x + camx, dir.y, dir.z);
+    }
+    void cameraUpY()
+    {
+        cam.transform.position = new Vector3(dir.x, dir.y + camy, dir.z);
+
+    }
+    void cameraDownX()
+    {
+        cam.transform.position = new Vector3(dir.x - camx, dir.y, dir.z);
+
+    }
+    void cameraDownY()
+    {
+        cam.transform.position = new Vector3(dir.x, dir.y - camy, dir.z);
+
+    }
 }

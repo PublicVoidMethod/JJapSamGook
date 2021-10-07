@@ -11,7 +11,9 @@ public class EnemyMove : MonoBehaviour
         Idle,
         Move,
         Attack,
-            Die
+        Die,
+        ComboDamaged,
+        Throw
     }
 
     public EnemyState eState;
@@ -21,24 +23,30 @@ public class EnemyMove : MonoBehaviour
     public float moveSpeed = 5;
     Animator anim;
     float currentTime = 0;
-    public float delayTime = 2;
+    public float delayTime = 1;
     bool isNum = false;
-    [HideInInspector] public int maxHP = 10;
+    [HideInInspector] public int maxHP = 1000;
     [SerializeField] int curHP = 0;
     int liveNum = 1;
-
+    Rigidbody rb;
+    public float hitUp= 5.0f;
+    public int specialNum;
+    public int throwNum;
+    GameObject sword;
     void Start()
     {
         currentTime = delayTime;
         eState = EnemyState.Idle;
-        player = GameObject.FindGameObjectWithTag("Player"); // ½É½Â¿ì°¡ ¾¸        
+        player = GameObject.FindGameObjectWithTag("Player"); // ï¿½É½Â¿ì°¡ ï¿½ï¿½        
         anim = GetComponentInChildren<Animator>();
         curHP = maxHP;
-
-        
+        rb = GetComponent<Rigidbody>();
+        specialNum = 1;
+        throwNum = 1;
+        sword = transform.GetComponentInChildren<SwordItem>().gameObject;
     }
 
-    protected void Update()
+    public void Update()
     {
         switch (eState)
         {
@@ -54,6 +62,12 @@ public class EnemyMove : MonoBehaviour
             case EnemyState.Die:
                 Die();
                 break;
+            case EnemyState.ComboDamaged:
+                ComboDamaged();
+                break;
+            case EnemyState.Throw:
+                Throw();
+                break;
             default:
                 break;
         }
@@ -66,6 +80,52 @@ public class EnemyMove : MonoBehaviour
         currentTime += Time.deltaTime;
 
 
+    }
+
+    public void Throw()
+    {
+        //ìºë¦­í„° ë’·ë°©í–¥ìœ¼ë¡œ ì„¤ì •í•œë‹¤.
+        
+        rb.constraints = RigidbodyConstraints.None;
+        rb.constraints = RigidbodyConstraints.FreezeRotation;
+        
+        rb.AddForce(-transform.forward * 50);
+        rb.useGravity = true;
+        //rb.constraints = RigidbodyConstraints.FreezeAll;
+        if(throwNum == 1)
+        {
+            anim.SetTrigger("SpecialThrow");
+            throwNum = 0;
+        }
+        Invoke("skillUp", 2.0f);
+    }
+
+    public void ComboDamaged()
+    {
+
+        //ì½¤ë³´ ë°ë¯¸ì§€, í•„ì‚´ê¸° ë°ë¯¸ì§€ë¥¼ ì…ìœ¼ë©´, ë‹¤ ë§ì„ ë•Œê¹Œì§€ ê³µì¤‘ì— ë– ìˆëŠ”ë‹¤.
+        curHP = 100000;
+        rb.useGravity = false;
+        Vector3 ePos = transform.position;
+
+        rb.constraints = RigidbodyConstraints.FreezeAll;
+        
+        sword.transform.parent = null;
+        sword.GetComponent<BoxCollider>().isTrigger = false;
+        sword.AddComponent<Rigidbody>();
+        if (specialNum ==1)
+        { 
+        anim.SetTrigger("SpecialHit");
+           
+            specialNum = 0;
+        }
+      
+    }
+
+    private void skillUp()
+    {
+        specialNum = 1;
+        throwNum = 1;
     }
 
     private void Idle()
@@ -95,6 +155,7 @@ public class EnemyMove : MonoBehaviour
     {
         
         Vector3 dir = player.transform.position - transform.position;
+        dir.y = 0;
         float distance = dir.magnitude;
         if (distance <= attackRange)
         {
@@ -105,8 +166,8 @@ public class EnemyMove : MonoBehaviour
 
             //enemyAnim.SetTrigger("MoveToAttack");
 
-            //Á¶°Ç¿¡ ¸Â´Ù¸é ÇÔ¼ö¸¦ Á¾·áÇÑ´Ù.
-            //¸®ÅÏÀÌ ³ª¿À¸é ¾Æ·¡ ÇÔ¼ö´Â º¸Áö ¾Ê°í Á¾·áÇÑ´Ù.
+            //ï¿½ï¿½ï¿½Ç¿ï¿½ ï¿½Â´Ù¸ï¿½ ï¿½Ô¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
+            //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Æ·ï¿½ ï¿½Ô¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
             return;
         }
 
@@ -119,7 +180,7 @@ public class EnemyMove : MonoBehaviour
 
     public virtual void Attack()
     {
-        
+         
         //print(currentTime);
         int AttackNum = 4;
         if (currentTime >= delayTime)
@@ -135,43 +196,45 @@ public class EnemyMove : MonoBehaviour
         Vector3 dir = player.transform.position - transform.position;
         float distance = dir.magnitude;
         currentTime += Time.deltaTime;
-        //»çÁ¤°Å¸® ¾È¿¡ ÀÖ¾î¾ß ÇÏ°í)
+        //ï¿½ï¿½ï¿½ï¿½ï¿½Å¸ï¿½ ï¿½È¿ï¿½ ï¿½Ö¾ï¿½ï¿½ ï¿½Ï°ï¿½)
         if (distance < attackRange)
         {
             
-            //print("ÀÌÁ¦ºÎÅÍ °ø°İÀ» ½ÃÀÛÇÏ°Ú´Ù!");
+            //print("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°Ú´ï¿½!");
             if (AttackNum == 0)
             {
-           // print("0¹ø °ø°İ °Ô½Ã!");
+           // print("0ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô½ï¿½!");
                 anim.SetTrigger("Attack0");
                 
                 SetMoveState();
             }
             if(AttackNum == 1)
             {
-           // print("1¹ø °ø°İ °Ô½Ã!");
+           // print("1ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô½ï¿½!");
                 anim.SetTrigger("Attack1");
                 
                 SetMoveState();
             }
             if (AttackNum == 2)
             {
-           //print("2¹ø °ø°İ °Ô½Ã!");
+           //print("2ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô½ï¿½!");
                 anim.SetTrigger("Attack2");
                 
                 SetMoveState();
             }
             if (AttackNum == 3)
             {
-            //print("3¹ø °ø°İ °Ô½Ã!");
+            //print("3ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô½ï¿½!");
 
                 anim.SetTrigger("Attack3");
              
                 SetMoveState();
             }
+
+         
           
         }
-        //°ø°İ ¹üÀ§ ¹ÛÀÌ¸é
+        //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¸ï¿½
         else
         {
             SetMoveState();
@@ -180,10 +243,16 @@ public class EnemyMove : MonoBehaviour
         
     }
 
+    public void DirStop()
+    {
+      
+    }
+
+
     public void OnHit(int damage)
     {
         curHP = Mathf.Max(curHP - damage, 0);
-        print(curHP);
+        print("í˜„ì¬ ì²´ë ¥" + curHP);
     }
 
     public void Die()
@@ -192,8 +261,14 @@ public class EnemyMove : MonoBehaviour
         { 
         anim.SetTrigger("Die");
 
-        // Äİ¶óÀÌ´õ¸¦ ºñÈ°¼ºÈ­ÇÑ´Ù.
-        GetComponent<CapsuleCollider>().enabled = false;
+            // ï¿½İ¶ï¿½ï¿½Ì´ï¿½ï¿½ï¿½ ï¿½ï¿½È°ï¿½ï¿½È­ï¿½Ñ´ï¿½.
+            //GetComponent<CapsuleCollider>().enabled = false;
+
+            //sword = transform.GetComponentInChildren<SwordItem>().gameObject;
+            sword.transform.parent = null;
+            sword.GetComponent<BoxCollider>().isTrigger = false;
+            sword.AddComponent<Rigidbody>();
+
         Invoke("EnemyDestroy", 3.0f);
         }
     }
@@ -206,7 +281,7 @@ public class EnemyMove : MonoBehaviour
     //{
     //    Gizmos.color = Color.white;
 
-    //    // ½Ã¾ß ¹üÀ§ÀÇ ¾çÂÊ ³¡ ÁöÁ¡À» ±¸ÇÑ´Ù.
+    //    // ï¿½Ã¾ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ñ´ï¿½.
     //    Vector3[] sightPos = CalculateSightPoint(sightDistance, sightDegree);
 
     //    for (int i = 0; i < sightPos.Length; i++)
@@ -215,3 +290,4 @@ public class EnemyMove : MonoBehaviour
     //    }
     //}
 }
+

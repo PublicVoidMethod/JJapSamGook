@@ -128,6 +128,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2569665088934313337, guid: 67affd45ae1bb024ebf5bde99969cf20, type: 3}
   m_PrefabInstance: {fileID: 5901058095446914688}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &236725632 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 9080018469934300601, guid: 67affd45ae1bb024ebf5bde99969cf20, type: 3}
+  m_PrefabInstance: {fileID: 5901058095446914688}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &236725634
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,7 +158,6 @@ GameObject:
   - component: {fileID: 276830008}
   - component: {fileID: 276830007}
   - component: {fileID: 276830006}
-  - component: {fileID: 276830009}
   - component: {fileID: 276830010}
   m_Layer: 0
   m_Name: Main Camera
@@ -227,20 +231,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &276830009
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 276830005}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e7a4beb776c8ae43ad584e7aa6a8a19, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  viewPoint: {fileID: 0}
-  followSpeed: 2
 --- !u!114 &276830010
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -523,6 +513,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &810225284 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7385803925499134627, guid: 06efebdafb5d13842834426291139ef2, type: 3}
+  m_PrefabInstance: {fileID: 7424612431573458893}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3075ac28a38145745bf101bedc097dc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1648128071
 GameObject:
   m_ObjectHideFlags: 0
@@ -689,6 +690,22 @@ PrefabInstance:
       propertyPath: nextEdgeMaterial_Pass8
       value: 
       objectReference: {fileID: 552543503}
+    - target: {fileID: 5731844111646866433, guid: 67affd45ae1bb024ebf5bde99969cf20, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5901058095572165452, guid: 67affd45ae1bb024ebf5bde99969cf20, type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 276830007}
+    - target: {fileID: 5901058095572165452, guid: 67affd45ae1bb024ebf5bde99969cf20, type: 3}
+      propertyPath: anim
+      value: 
+      objectReference: {fileID: 236725632}
+    - target: {fileID: 5901058095572165452, guid: 67affd45ae1bb024ebf5bde99969cf20, type: 3}
+      propertyPath: enemy
+      value: 
+      objectReference: {fileID: 810225284}
     - target: {fileID: 7964980763047077090, guid: 67affd45ae1bb024ebf5bde99969cf20, type: 3}
       propertyPath: m_Name
       value: Player_SSW_Samasa

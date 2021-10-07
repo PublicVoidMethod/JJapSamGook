@@ -143,9 +143,8 @@ MonoBehaviour:
   maxHp: 30000
   jumpPower: 3
   livenumber: 1
-  rotationSpeed: 8
-  jumpCount: 1
   rb: {fileID: 4747192944949301220}
+  hitattack: {fileID: 0}
 --- !u!54 &4747192944949301220
 Rigidbody:
   m_ObjectHideFlags: 0
