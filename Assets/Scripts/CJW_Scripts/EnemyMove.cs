@@ -102,7 +102,7 @@ public class EnemyMove : MonoBehaviour
 
     public void ComboDamaged()
     {
-
+        print("콤보데미지 먹었다.");
         //콤보 데미지, 필살기 데미지를 입으면, 다 맞을 때까지 공중에 떠있는다.
         curHP = 100000;
         rb.useGravity = false;
@@ -112,14 +112,22 @@ public class EnemyMove : MonoBehaviour
         
         sword.transform.parent = null;
         sword.GetComponent<BoxCollider>().isTrigger = false;
+        if(sword.GetComponent<Rigidbody>() == null)
+        { 
         sword.AddComponent<Rigidbody>();
+        }
         if (specialNum ==1)
         { 
         anim.SetTrigger("SpecialHit");
            
             specialNum = 0;
+            
         }
       
+    }
+    public void specialNumUp()
+    {
+        specialNum = 1;
     }
 
     private void skillUp()
@@ -257,6 +265,7 @@ public class EnemyMove : MonoBehaviour
 
     public void Die()
     {
+        print("죽었다.");
       if(liveNum ==0)
         { 
         anim.SetTrigger("Die");

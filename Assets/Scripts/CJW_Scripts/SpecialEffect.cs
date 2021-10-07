@@ -102,4 +102,18 @@ public class SpecialEffect : MonoBehaviour
     {
         GameObject go = Instantiate(effect, transform.position, Quaternion.identity);
     }
+
+    public void MotionStop()
+    {
+        print("ภ๛ฟ๋ตส");
+        anim.SetFloat("Speed", 0);
+        Invoke("Restart", 1.0f);
+    }
+
+    void Restart()
+    {
+        anim.SetFloat("Speed", 1);
+    }
+
+   
 }
